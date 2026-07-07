@@ -9,14 +9,236 @@
 
 <style>
     .clean-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); }
-    .clean-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
-    .btn-action-primary { background-color: #0f172a; color: #ffffff; padding: 0.65rem 1.2rem; border-radius: 10px; font-weight: 600; font-size: 0.85rem; border: none; transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.5rem; }
+    
+    /* === HEADER SECTION: JUDUL & TOOLBAR SEJAJAR === */
+    .header-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+    }
+
+    .header-title {
+        flex: 1;
+        min-width: 250px;
+    }
+
+    .header-title h2 {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #0f172a;
+        margin-bottom: 0.25rem;
+        letter-spacing: -0.02em;
+    }
+
+    .header-title p {
+        font-size: 0.85rem;
+        color: #64748b;
+        margin: 0;
+    }
+
+    /* === TOOLBAR === */
+    .toolbar-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        flex-shrink: 0;
+    }
+
+    .search-box {
+        position: relative;
+        width: 260px;
+    }
+    .search-box input {
+        width: 100%;
+        padding: 0.65rem 1rem 0.65rem 2.5rem;
+        border-radius: 10px;
+        border: 1px solid #cbd5e1;
+        background-color: rgba(248, 250, 252, 0.5);
+        font-size: 0.85rem;
+        transition: all 0.2s ease;
+    }
+    .search-box input:focus {
+        background-color: #ffffff;
+        border-color: #39af93;
+        box-shadow: 0 0 0 4px rgba(57, 175, 147, 0.15);
+        outline: none;
+    }
+    .search-box .search-icon {
+        position: absolute;
+        left: 0.85rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #94a3b8;
+        font-size: 0.9rem;
+        pointer-events: none;
+    }
+    .search-box .clear-search {
+        position: absolute;
+        right: 0.6rem;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        color: #94a3b8;
+        cursor: pointer;
+        display: none;
+        font-size: 0.8rem;
+        padding: 0.25rem;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        line-height: 1;
+        transition: all 0.2s;
+    }
+    .search-box .clear-search:hover {
+        color: #ef4444;
+        background-color: rgba(239, 68, 68, 0.08);
+    }
+
+    .entries-box {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    .entries-box label {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #0f172a;
+        white-space: nowrap;
+    }
+    .entries-box select {
+        padding: 0.6rem 2rem 0.6rem 0.85rem;
+        border-radius: 10px;
+        border: 1px solid #cbd5e1;
+        background-color: rgba(248, 250, 252, 0.5);
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #0f172a;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2364748b' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: calc(100% - 0.75rem) center;
+    }
+    .entries-box select:focus {
+        border-color: #39af93;
+        box-shadow: 0 0 0 4px rgba(57, 175, 147, 0.15);
+        outline: none;
+    }
+
+    .btn-action-primary { background-color: #0f172a; color: #ffffff; padding: 0.65rem 1.2rem; border-radius: 10px; font-weight: 600; font-size: 0.85rem; border: none; transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.5rem; white-space: nowrap; }
     .btn-action-primary:hover { background-color: #1e293b; color: #fff; }
+    
     .table-clean thead th { background-color: #f8fafc !important; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: #64748b; padding: 1rem; border-bottom: 1px solid #e2e8f0; }
     .table-clean tbody td { padding: 1rem; border-bottom: 1px solid #f1f5f9; }
     .code-badge { background-color: #f1f5f9; color: #334155; font-family: monospace; font-size: 0.85rem; padding: 0.25rem 0.5rem; border-radius: 6px; font-weight: 600; }
     .btn-icon { width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center; border-radius: 8px; border: 1px solid #e2e8f0; background: white; color: #64748b; transition: 0.2s; }
     .btn-icon:hover { background: #f8fafc; border-color: #cbd5e1; }
+
+    /* Info Hasil Pencarian */
+    .search-info {
+        font-size: 0.8rem;
+        color: #64748b;
+        margin-bottom: 1rem;
+        display: none;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    .search-info.active {
+        display: flex;
+    }
+    .search-info .badge-count {
+        background-color: #39af93;
+        color: #fff;
+        padding: 0.15rem 0.5rem;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 700;
+    }
+
+    /* No result state */
+    .no-result-row {
+        display: none;
+    }
+    .no-result-row.active {
+        display: table-row;
+    }
+
+    /* Row highlight saat di-search */
+    .table-clean tbody tr.search-hidden {
+        display: none;
+    }
+    .table-clean tbody tr.search-match {
+        background-color: rgba(57, 175, 147, 0.04);
+    }
+
+    mark.search-highlight {
+        background-color: rgba(57, 175, 147, 0.25);
+        color: inherit;
+        padding: 0.05em 0.15em;
+        border-radius: 3px;
+    }
+
+    /* === PAGINATION === */
+    .pagination-wrapper {
+        margin-top: 2rem;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .pagination-info {
+        font-size: 0.8rem;
+        color: #64748b;
+        font-weight: 500;
+        white-space: nowrap;
+    }
+
+    .pagination-wrapper .pagination {
+        margin-bottom: 0;
+        gap: 4px;
+    }
+    .pagination-wrapper .page-item .page-link {
+        color: #0f172a;
+        background-color: #ffffff;
+        border: 1px solid #e2e8f0;
+        padding: 0.5rem 0.85rem;
+        font-size: 0.85rem;
+        font-weight: 600;
+        border-radius: 8px !important;
+        transition: all 0.2s;
+        min-width: 38px;
+        text-align: center;
+    }
+    .pagination-wrapper .page-item .page-link:hover {
+        background-color: #f1f5f9;
+        border-color: #cbd5e1;
+        color: #0f172a;
+    }
+    .pagination-wrapper .page-item.active .page-link {
+        background-color: #0f172a;
+        border-color: #0f172a;
+        color: #ffffff;
+    }
+    .pagination-wrapper .page-item.disabled .page-link {
+        background-color: #f8fafc;
+        border-color: #e2e8f0;
+        color: #94a3b8;
+    }
+    .pagination-wrapper .page-item.page-ellipsis .page-link {
+        background: transparent;
+        border-color: transparent;
+        color: #94a3b8;
+        cursor: default;
+        pointer-events: none;
+        padding: 0.5rem 0.4rem;
+    }
 
     /* ========================================= */
     /* CHOICE.JS CUSTOM STYLING                  */
@@ -24,77 +246,129 @@
     .choices { margin-bottom: 0 !important; width: 100% !important; }
     
     .choices__inner {
-        min-height: 46px !important;
-        background-color: #fff !important;
-        border: 1px solid #cbd5e1 !important;
-        border-radius: 10px !important;
-        padding: 6px 12px !important;
-        font-size: 0.9rem !important;
-        transition: all 0.2s ease !important;
+        min-height: 36px !important;
+        background-color: #ffffff !important;
+        border: 1px solid #d7dee8 !important;
+        border-radius: 6px !important;
+        padding: 3px 8px !important;
+        font-size: 0.84rem !important;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease !important;
+        box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04) !important;
+    }
+
+    .choices[data-type*="select-multiple"] .choices__inner {
+        max-height: 48px !important;
+        overflow-y: auto !important;
+    }
+
+    .choices[data-type*="select-one"]::after {
+        border-color: #64748b transparent transparent !important;
+        right: 14px !important;
+        margin-top: -2px !important;
+    }
+
+    .choices[data-type*="select-one"].is-open::after {
+        border-color: transparent transparent #64748b !important;
+        margin-top: -7px !important;
     }
     
-    /* Single select styling */
     .choices__list--single {
-        padding: 4px 8px !important;
+        padding: 1px 24px 1px 2px !important;
     }
     .choices__list--single .choices__item {
         color: #0f172a !important;
+        font-weight: 500 !important;
     }
     
-    /* Multiple select (Gejala) - Tags */
+    .choices__list--multiple {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        align-items: center !important;
+        gap: 2px 4px !important;
+    }
+
     .choices__list--multiple .choices__item {
-        background: linear-gradient(135deg, #47fda5 0%, #39af93 100%) !important;
-        border: none !important;
-        border-radius: 6px !important;
-        padding: 4px 10px !important;
-        font-size: 0.85rem !important;
-        font-weight: 500 !important;
-        margin: 2px 6px 2px 0 !important;
-        box-shadow: 0 2px 4px rgba(57, 175, 147, 0.3) !important;
-        color: #ffffff !important;
+        background: #f1f5f4 !important;
+        border: 1px solid #b9d8cf !important;
+        border-radius: 4px !important;
+        padding: 1px 6px !important;
+        font-size: 0.74rem !important;
+        font-weight: 600 !important;
+        margin: 0 !important;
+        box-shadow: none !important;
+        color: #0f5f50 !important;
+        line-height: 1.25 !important;
+        max-width: 100% !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        vertical-align: middle !important;
     }
     
     .choices__list--multiple .choices__item.is-highlighted {
-        background: linear-gradient(135deg, #39af93 0%, #2d8a74 100%) !important;
-        opacity: 0.9 !important;
+        background: #e2f3ee !important;
+        border-color: #39af93 !important;
+        opacity: 1 !important;
     }
     
     .choices__list--multiple .choices__item .choices__button {
-        border-left: 1px solid rgba(255, 255, 255, 0.956) !important;
-        margin-left: 8px !important;
-        padding: 0 6px !important;
+        border-left: 1px solid #b9d8cf !important;
+        margin-left: 4px !important;
+        padding: 0 0 0 4px !important;
         background-image: none !important;
-        width: auto !important;
+        width: 14px !important;
+        min-width: 14px !important;
+        height: 14px !important;
+        opacity: 1 !important;
+        text-indent: 0 !important;
+        overflow: visible !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        color: transparent !important;
+        position: relative !important;
     }
     
     .choices__list--multiple .choices__item .choices__button::after {
-        content: "✕";
-        color: rgba(255, 255, 255, 0.9);
-        font-size: 0.75rem;
+        content: "\00d7";
+        color: #0f5f50;
+        font-size: 0.82rem;
+        line-height: 1;
         font-weight: bold;
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     
     .choices__list--multiple .choices__item .choices__button:hover::after {
-        color: #ffffff;
+        color: #ef4444;
     }
     
-    /* Dropdown */
     .choices__list--dropdown,
     .choices__list[aria-expanded] {
-        border: 1px solid #e2e8f0 !important;
-        border-radius: 10px !important;
-        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15) !important;
+        border: 1px solid #d7dee8 !important;
+        border-radius: 6px !important;
+        box-shadow: 0 12px 24px -16px rgba(15, 23, 42, 0.35), 0 4px 10px rgba(15, 23, 42, 0.08) !important;
         margin-top: 4px !important;
         z-index: 10000 !important;
         background: #fff !important;
+        overflow: hidden !important;
+    }
+
+    .choices__list--dropdown .choices__list,
+    .choices__list[aria-expanded] .choices__list {
+        max-height: 180px !important;
     }
     
     .choices__list--dropdown .choices__item,
     .choices__list[aria-expanded] .choices__item {
-        padding: 10px 14px !important;
-        font-size: 0.9rem !important;
-        color: #b1d2ff !important;
+        padding: 6px 10px !important;
+        font-size: 0.82rem !important;
+        color: #0f172a !important;
         border-bottom: 1px solid #f1f5f9 !important;
+        line-height: 1.25 !important;
     }
     
     .choices__list--dropdown .choices__item:last-child,
@@ -104,22 +378,69 @@
     
     .choices__list--dropdown .choices__item--selectable.is-highlighted,
     .choices__list[aria-expanded] .choices__item--selectable.is-highlighted {
-        background-color: #f0fdf4 !important;
+        background-color: #f8fafc !important;
         color: #0f172a !important;
     }
     
-    /* Focus state */
     .choices.is-focused .choices__inner,
     .choices.is-open .choices__inner {
         border-color: #39af93 !important;
-        box-shadow: 0 0 0 4px rgba(57, 175, 147, 0.15) !important;
+        background-color: #ffffff !important;
+        box-shadow: 0 0 0 3px rgba(57, 175, 147, 0.14), 0 1px 2px rgba(15, 23, 42, 0.05) !important;
     }
     
-    /* Input search */
     .choices__input {
         background-color: transparent !important;
         color: #0f172a !important;
-        font-size: 0.9rem !important;
+        font-size: 0.82rem !important;
+        margin-bottom: 0 !important;
+        padding: 1px 0 !important;
+    }
+
+    .choices[data-type*="select-multiple"] .choices__input {
+        flex: 1 0 180px !important;
+        min-width: 180px !important;
+        min-height: 26px !important;
+        padding: 4px 2px !important;
+    }
+
+    #selectedGejalaList,
+    #editSelectedGejalaList {
+        padding: 0.5rem !important;
+        max-height: 160px;
+        overflow-y: auto;
+    }
+
+    #selectedGejalaList .gejala-item,
+    #editSelectedGejalaList .gejala-item {
+        margin-bottom: 0.15rem !important;
+        row-gap: 0.25rem;
+    }
+
+    #selectedGejalaList .code-badge,
+    #editSelectedGejalaList .code-badge {
+        font-size: 0.72rem;
+        padding: 0.1rem 0.35rem;
+        border-radius: 4px;
+    }
+
+    #selectedGejalaList .form-control-sm,
+    #editSelectedGejalaList .form-control-sm {
+        min-height: 28px;
+        padding-top: 0.15rem;
+        padding-bottom: 0.15rem;
+        font-size: 0.78rem;
+    }
+
+    #selectedGejalaList .btn-sm,
+    #editSelectedGejalaList .btn-sm {
+        --bs-btn-padding-y: 0.15rem;
+        --bs-btn-padding-x: 0.4rem;
+        --bs-btn-font-size: 0.78rem;
+    }
+
+    #selectedGejalaList .gejala-item:last-child,
+    #editSelectedGejalaList .gejala-item:last-child {
         margin-bottom: 0 !important;
     }
     
@@ -131,27 +452,92 @@
         color: #94a3b8 !important;
         opacity: 1 !important;
     }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+        .header-section {
+            flex-direction: column;
+            align-items: stretch;
+        }
+        .header-title {
+            min-width: 100%;
+            margin-bottom: 1rem;
+        }
+        .toolbar-wrapper {
+            justify-content: flex-end;
+            flex-wrap: wrap;
+        }
+        .search-box {
+            width: 100%;
+            max-width: 300px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .toolbar-wrapper {
+            flex-direction: column;
+            align-items: stretch;
+        }
+        .search-box,
+        .entries-box,
+        .btn-action-primary {
+            width: 100%;
+            justify-content: center;
+        }
+        .entries-box {
+            justify-content: center;
+        }
+    }
 </style>
 
 <div class="container py-4">
-    <div class="mb-4">
-        <h2 class="fw-bold text-dark">Basis Aturan (Rules)</h2>
-        <p class="text-muted">Pengaturan relasi penyakit dan gejala dalam sistem pakar.</p>
-    </div>
-
     <div class="clean-card">
-        <div class="clean-header">
-            <div>
-                <h5 class="fw-bold text-dark mb-1">Daftar Rule Inferensi</h5>
-                <p class="text-muted small mb-0">Basis pengetahuan sistem pakar</p>
+        {{-- === HEADER: JUDUL & TOOLBAR SEJAJAR === --}}
+        <div class="header-section">
+            {{-- Judul di kiri --}}
+            <div class="header-title">
+                <h2>Basis Aturan (Rules)</h2>
+                <p>Pengaturan relasi penyakit dan gejala dalam sistem pakar</p>
             </div>
-            <button type="button" class="btn-action-primary" data-bs-toggle="modal" data-bs-target="#modalRule">
-                <i class="bi bi-plus-lg"></i> Tambah Rule
-            </button>
+
+            {{-- Toolbar di kanan --}}
+            <div class="toolbar-wrapper">
+                {{-- Search Box --}}
+                <div class="search-box">
+                    <i class="bi bi-search search-icon"></i>
+                    <input type="text" id="liveSearch" placeholder="Cari kode rule, penyakit..." autocomplete="off" />
+                    <button type="button" class="clear-search" id="clearSearch" title="Bersihkan pencarian">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+                </div>
+
+                {{-- Show Entries --}}
+                <div class="entries-box">
+                    <label>Show</label>
+                    <select id="showEntries">
+                        <option value="5">5</option>
+                        <option value="10" selected>10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                </div>
+
+                {{-- Tombol Tambah --}}
+                <button type="button" class="btn-action-primary" data-bs-toggle="modal" data-bs-target="#modalRule">
+                    <i class="bi bi-plus-lg"></i> Tambah Rule
+                </button>
+            </div>
+        </div>
+
+        {{-- Info hasil pencarian --}}
+        <div class="search-info" id="searchInfo">
+            <i class="bi bi-funnel-fill" style="color: #39af93;"></i>
+            <span>Menampilkan <span class="badge-count" id="matchCount">0</span> hasil untuk: "<strong id="searchKeyword"></strong>"</span>
         </div>
 
         <div class="table-responsive">
-            <table class="table table-clean align-middle">
+            <table class="table table-clean align-middle" id="tableRules">
                 <thead>
                     <tr>
                         <th style="width: 120px;">Kode Rule</th>
@@ -161,9 +547,10 @@
                         <th style="width: 140px;" class="text-center">Aksi</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="tableBody">
                     @forelse($rules as $rule)
-                    <tr>
+                    <tr class="data-row"
+                        data-search="{{ strtolower($rule->kode_rule . ' ' . ($rule->penyakit->nama_penyakit ?? '') . ' ' . $rule->kondisi_fuzzy) }}">
                         <td><span class="code-badge">{{ $rule->kode_rule }}</span></td>
                         <td class="fw-semibold">{{ $rule->penyakit->nama_penyakit ?? '-' }}</td>
                         <td>
@@ -214,11 +601,24 @@
                         </td>
                     </tr>
                     @endforelse
+
+                    {{-- No Result Row --}}
+                    <tr class="no-result-row" id="noResultRow">
+                        <td colspan="5" class="text-center py-5 text-muted">
+                            <i class="bi bi-search d-block mb-2" style="font-size: 2rem; color: #cbd5e1;"></i>
+                            Tidak ada data yang cocok dengan pencarian Anda.
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
-        <div class="d-flex justify-content-end mt-3">
-            {{ $rules->links() }}
+
+        {{-- Pagination --}}
+        <div class="pagination-wrapper" id="paginationWrapper">
+            <span class="pagination-info" id="paginationInfo"></span>
+            <div id="paginationContainer">
+                {{ $rules->links() }}
+            </div>
         </div>
     </div>
 </div>
@@ -436,7 +836,238 @@
     document.addEventListener('DOMContentLoaded', function() {
         
         // ==========================================
-        // 1. INITIALIZE CHOICES.JS - MODAL TAMBAH
+        // LIVE SEARCH
+        // ==========================================
+        const searchInput = document.getElementById('liveSearch');
+        const clearBtn = document.getElementById('clearSearch');
+        const dataRows = document.querySelectorAll('.data-row');
+        const noResultRow = document.getElementById('noResultRow');
+        const searchInfo = document.getElementById('searchInfo');
+        const matchCount = document.getElementById('matchCount');
+        const searchKeyword = document.getElementById('searchKeyword');
+
+        const originalContents = [];
+        dataRows.forEach((row, rowIndex) => {
+            originalContents[rowIndex] = [];
+            const cells = row.querySelectorAll('td');
+            cells.forEach((cell, cellIndex) => {
+                originalContents[rowIndex][cellIndex] = cell.innerHTML;
+            });
+        });
+
+        searchInput.addEventListener('input', function() {
+            const query = this.value.toLowerCase().trim();
+            clearBtn.style.display = query.length > 0 ? 'block' : 'none';
+
+            let visibleCount = 0;
+
+            dataRows.forEach((row, rowIndex) => {
+                const searchData = row.getAttribute('data-search');
+                const isMatch = query === '' || searchData.includes(query);
+
+                if (isMatch) {
+                    row.classList.remove('search-hidden');
+                    row.classList.add('search-match');
+                    visibleCount++;
+                    if (query.length > 0) {
+                        highlightRow(row, rowIndex, query);
+                    } else {
+                        restoreRow(row, rowIndex);
+                    }
+                } else {
+                    row.classList.add('search-hidden');
+                    row.classList.remove('search-match');
+                    restoreRow(row, rowIndex);
+                }
+            });
+
+            if (query.length > 0) {
+                searchInfo.classList.add('active');
+                matchCount.textContent = visibleCount;
+                searchKeyword.textContent = this.value.trim();
+            } else {
+                searchInfo.classList.remove('active');
+                dataRows.forEach((row, rowIndex) => {
+                    row.classList.remove('search-hidden', 'search-match');
+                    restoreRow(row, rowIndex);
+                });
+            }
+
+            if (visibleCount === 0 && query.length > 0) {
+                noResultRow.classList.add('active');
+            } else {
+                noResultRow.classList.remove('active');
+            }
+
+            updatePaginationInfo();
+        });
+
+        clearBtn.addEventListener('click', function() {
+            searchInput.value = '';
+            searchInput.dispatchEvent(new Event('input'));
+            searchInput.focus();
+        });
+
+        function highlightRow(row, rowIndex, query) {
+            const cells = row.querySelectorAll('td');
+            cells.forEach((cell, cellIndex) => {
+                if (cellIndex === cells.length - 1) return; // Skip kolom aksi
+                const original = originalContents[rowIndex][cellIndex];
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = original;
+                const textContent = tempDiv.textContent || tempDiv.innerText;
+                if (textContent.toLowerCase().includes(query)) {
+                    cell.innerHTML = highlightText(original, query);
+                } else {
+                    cell.innerHTML = original;
+                }
+            });
+        }
+
+        function highlightText(html, query) {
+            const regex = new RegExp(`(${escapeRegex(query)})`, 'gi');
+            return html.replace(/>([^<]+)</g, function(match, textContent) {
+                return '>' + textContent.replace(regex, '<mark class="search-highlight">$1</mark>') + '<';
+            });
+        }
+
+        function escapeRegex(string) {
+            return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        }
+
+        function restoreRow(row, rowIndex) {
+            const cells = row.querySelectorAll('td');
+            cells.forEach((cell, cellIndex) => {
+                cell.innerHTML = originalContents[rowIndex][cellIndex];
+            });
+        }
+
+        // ==========================================
+        // SHOW ENTRIES
+        // ==========================================
+        const showEntries = document.getElementById('showEntries');
+        const urlParams = new URLSearchParams(window.location.search);
+        const currentPerPage = urlParams.get('per_page') || 10;
+        showEntries.value = currentPerPage;
+
+        showEntries.addEventListener('change', function() {
+            const url = new URL(window.location.href);
+            url.searchParams.set('per_page', this.value);
+            url.searchParams.set('page', 1);
+            window.location.href = url.toString();
+        });
+
+        // ==========================================
+        // PAGINATION TRUNCATED
+        // ==========================================
+        function buildTruncatedPagination() {
+            const paginationContainer = document.getElementById('paginationContainer');
+            const paginationNav = paginationContainer.querySelector('nav');
+            if (!paginationNav) return;
+
+            const paginationUl = paginationNav.querySelector('ul.pagination') || paginationNav.querySelector('ul');
+            if (!paginationUl) return;
+
+            const allItems = Array.from(paginationUl.querySelectorAll('.page-item'));
+            if (allItems.length <= 7) return;
+
+            let pageItems = [];
+
+            allItems.forEach(item => {
+                const link = item.querySelector('.page-link');
+                if (!link) return;
+                const ariaLabel = item.getAttribute('aria-label') || '';
+                if (ariaLabel.toLowerCase().includes('previous') || 
+                    ariaLabel.toLowerCase().includes('next') || 
+                    item.classList.contains('page-item-prev') || 
+                    item.classList.contains('page-item-next') ||
+                    link.querySelector('.bi-chevron-left') ||
+                    link.querySelector('.bi-chevron-right')) {
+                    return;
+                }
+                const pageNum = parseInt(link.textContent.trim());
+                if (!isNaN(pageNum)) {
+                    pageItems.push({ element: item, page: pageNum });
+                }
+            });
+
+            if (pageItems.length === 0) return;
+
+            const activeItem = paginationUl.querySelector('.page-item.active');
+            let currentPage = 1;
+            if (activeItem) {
+                const activeLink = activeItem.querySelector('.page-link');
+                currentPage = parseInt(activeLink.textContent.trim()) || 1;
+            }
+
+            const totalPages = pageItems[pageItems.length - 1].page;
+            const firstPage = pageItems[0].page;
+
+            const visiblePages = new Set();
+            visiblePages.add(firstPage);
+            visiblePages.add(totalPages);
+            for (let i = Math.max(firstPage, currentPage - 1); i <= Math.min(totalPages, currentPage + 1); i++) {
+                visiblePages.add(i);
+            }
+            if (totalPages >= 2) visiblePages.add(2);
+            if (totalPages >= 2) visiblePages.add(totalPages - 1);
+
+            pageItems.forEach(({ element, page }) => {
+                if (visiblePages.has(page)) {
+                    element.style.display = '';
+                    element.classList.remove('page-ellipsis');
+                } else {
+                    element.style.display = 'none';
+                }
+            });
+
+            paginationUl.querySelectorAll('.page-ellipsis').forEach(el => el.remove());
+            const sortedVisible = Array.from(visiblePages).sort((a, b) => a - b);
+
+            for (let i = 0; i < sortedVisible.length - 1; i++) {
+                const current = sortedVisible[i];
+                const next = sortedVisible[i + 1];
+                if (next - current > 1) {
+                    const targetItem = pageItems.find(p => p.page === next);
+                    if (targetItem) {
+                        const ellipsis = document.createElement('li');
+                        ellipsis.className = 'page-item page-ellipsis';
+                        ellipsis.innerHTML = '<span class="page-link">…</span>';
+                        ellipsis.style.display = '';
+                        paginationUl.insertBefore(ellipsis, targetItem.element);
+                    }
+                }
+            }
+        }
+
+        function updatePaginationInfo() {
+            const infoEl = document.getElementById('paginationInfo');
+            const totalRows = dataRows.length;
+            const visibleRows = document.querySelectorAll('.data-row:not(.search-hidden)').length;
+
+            if (searchInput.value.trim().length > 0) {
+                infoEl.textContent = `Ditemukan ${visibleRows} dari ${totalRows} data`;
+                return;
+            }
+
+            const paginationNav = document.querySelector('#paginationContainer nav');
+            if (paginationNav) {
+                const showingText = paginationNav.querySelector('.text-muted, small');
+                if (showingText) {
+                    infoEl.textContent = showingText.textContent.trim();
+                } else {
+                    infoEl.textContent = `${visibleRows} data`;
+                }
+            } else {
+                infoEl.textContent = `${visibleRows} data`;
+            }
+        }
+
+        buildTruncatedPagination();
+        updatePaginationInfo();
+
+        // ==========================================
+        // CHOICES.JS INITIALIZATION
         // ==========================================
         
         // Penyakit (Single Select)
@@ -460,7 +1091,7 @@
             });
         }
 
-        // Gejala (Multiple Select) - PERBAIKAN: Tanpa callbackOnCreateTemplates
+        // Gejala (Multiple Select)
         const gejalaEl = document.getElementById('gejalaSelect');
         if (gejalaEl) {
             choicesGejala = new Choices(gejalaEl, {
@@ -478,11 +1109,7 @@
             gejalaEl.addEventListener('change', renderSelectedGejala);
         }
 
-        // ==========================================
-        // 2. INITIALIZE CHOICES.JS - MODAL EDIT
-        // ==========================================
-        
-        // Penyakit Edit (Single Select)
+        // Edit Penyakit (Single Select)
         const editPenyakitEl = document.getElementById('editPenyakitSelect');
         if (editPenyakitEl) {
             choicesEditPenyakit = new Choices(editPenyakitEl, {
@@ -493,7 +1120,7 @@
             });
         }
 
-        // Kondisi Fuzzy Edit (Single Select)
+        // Edit Kondisi Fuzzy (Single Select)
         const editKondisiEl = document.getElementById('edit_kondisi_fuzzy');
         if (editKondisiEl) {
             choicesEditKondisi = new Choices(editKondisiEl, {
@@ -503,7 +1130,7 @@
             });
         }
 
-        // Gejala Edit (Multiple Select) - PERBAIKAN: Tanpa callbackOnCreateTemplates
+        // Edit Gejala (Multiple Select)
         const editGejalaEl = document.getElementById('editGejalaSelect');
         if (editGejalaEl) {
             choicesEditGejala = new Choices(editGejalaEl, {
@@ -522,7 +1149,7 @@
         }
 
         // ==========================================
-        // 3. RENDER LIST GEJALA + BOBOT (Tambah)
+        // RENDER LIST GEJALA + BOBOT (Tambah)
         // ==========================================
         function renderSelectedGejala() {
             if (!choicesGejala) return;
@@ -544,7 +1171,6 @@
 
             wrapper.classList.remove('d-none');
 
-            // Simpan bobot lama berdasarkan ID gejala
             const oldBobot = {};
             list.querySelectorAll('.gejala-item').forEach(item => {
                 const id = item.getAttribute('data-id');
@@ -592,7 +1218,7 @@
         }
 
         // ==========================================
-        // 4. RENDER LIST GEJALA + BOBOT (Edit)
+        // RENDER LIST GEJALA + BOBOT (Edit)
         // ==========================================
         function renderEditSelectedGejala() {
             if (!choicesEditGejala) return;
@@ -614,7 +1240,6 @@
 
             wrapper.classList.remove('d-none');
 
-            // Simpan bobot lama
             const oldBobot = {};
             list.querySelectorAll('.gejala-item').forEach(item => {
                 const id = item.getAttribute('data-id');
@@ -662,7 +1287,7 @@
         }
 
         // ==========================================
-        // 5. HAPUS GEJALA DARI LIST
+        // HAPUS GEJALA DARI LIST
         // ==========================================
         document.addEventListener('click', function(e) {
             if (e.target.closest('.btn-remove-gejala')) {
@@ -683,7 +1308,7 @@
         });
 
         // ==========================================
-        // 6. RESET FORM TAMBAH
+        // RESET FORM TAMBAH
         // ==========================================
         const modalRule = document.getElementById('modalRule');
         if (modalRule) {
@@ -703,7 +1328,7 @@
         }
 
         // ==========================================
-        // 7. LOAD DATA KE FORM EDIT
+        // LOAD DATA KE FORM EDIT
         // ==========================================
         document.querySelectorAll('.btn-edit-rule').forEach(btn => {
             btn.addEventListener('click', function() {
@@ -713,13 +1338,9 @@
                 const kondisi = this.getAttribute('data-kondisi');
                 const gejala = JSON.parse(this.getAttribute('data-gejala'));
 
-                // Set action URL
                 document.getElementById('formEditRule').setAttribute('action', `/rules/${id}`);
-                
-                // Isi field dasar
                 document.getElementById('edit_kode_rule').value = kode;
                 
-                // Set nilai dropdown
                 if (choicesEditPenyakit) {
                     choicesEditPenyakit.removeActiveItems();
                     choicesEditPenyakit.setChoiceByValue(penyakit);
@@ -742,12 +1363,10 @@
                 const gejalaIds = gejala.map(g => g.id.toString());
                 
                 setTimeout(() => {
-                    // Set nilai gejala terpilih
                     if (choicesEditGejala) {
                         choicesEditGejala.setChoiceByValue(gejalaIds);
                     }
 
-                    // Render list dengan bobot (gunakan index sequential)
                     let html = '';
                     gejala.forEach((g, index) => {
                         const option = document.querySelector('#editGejalaSelect option[value="' + g.id + '"]');
@@ -794,7 +1413,7 @@
         });
 
         // ==========================================
-        // 8. VALIDASI SEBELUM SUBMIT
+        // VALIDASI SEBELUM SUBMIT
         // ==========================================
         ['formRule', 'formEditRule'].forEach(formId => {
             const form = document.getElementById(formId);
@@ -844,7 +1463,7 @@
         });
 
         // ==========================================
-        // 9. DELETE CONFIRMATION
+        // DELETE CONFIRMATION
         // ==========================================
         document.body.addEventListener('submit', function(e) {
             const form = e.target;
@@ -877,7 +1496,7 @@
         });
 
         // ==========================================
-        // 10. FLASH MESSAGES
+        // FLASH MESSAGES
         // ==========================================
         @if(session('success'))
             Swal.fire({

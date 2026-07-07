@@ -68,14 +68,12 @@
                       <div class="dropdown-divider my-1"></div>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="javascript:void(0);">
-                        <form action="{{ route('logout') }}" method="POST" class="d-inline">
-                          @csrf
-                          <button type="submit" class="btn btn-link p-0 m-0 align-baseline" style="color: #ef4444;" title="Log Out">
-                            <i class="icon-base bx bx-power-off icon-md me-3"></i><span>Log Out</span>
-                          </button>
-                        </form>
-                      </a>
+                      <form action="{{ route('logout') }}" method="POST" class="m-0">
+                        @csrf
+                        <button type="submit" class="dropdown-item text-danger" title="Log Out">
+                          <i class="icon-base bx bx-power-off icon-md me-3"></i><span>Log Out</span>
+                        </button>
+                      </form>
                     </li>
                   </ul>
                 </li>

@@ -26,7 +26,7 @@
 
     /* Tombol Utama Minimalis */
     .btn-action-primary {
-        background-color: var(--text-dark, #0ee27c);
+        background-color: var(--text-dark, #10b981);
         color: #ffffff;
         padding: 0.65rem 1.2rem;
         border-radius: 10px;
@@ -39,7 +39,7 @@
         transition: all 0.2s ease;
     }
     .btn-action-primary:hover {
-        background-color: #21df73;
+        background-color: #10b981;
         color: #ffffff;
     }
 
@@ -313,7 +313,7 @@
         <div class="clean-header">
             <div>
                 <h5 class="fw-bold text-dark mb-1" style="letter-spacing: -0.01em;">Daftar Kriteria Gejala</h5>
-                <p class="text-muted small m-0">Gunakan tabel interaktif untuk menambah atau memodifikasi indikator medis</p>
+                {{-- <p class="text-muted small m-0">Gunakan tabel interaktif untuk menambah atau memodifikasi indikator medis</p> --}}
             </div>
             <div class="d-flex gap-3 align-items-center flex-wrap">
                 <!-- Search Box Live dengan Debounce -->

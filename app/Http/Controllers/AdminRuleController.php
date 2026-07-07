@@ -13,15 +13,26 @@ class AdminRuleController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        // Validasi per_page
+        $perPage = $request->get('per_page', 10);
+        $allowedPerPage = [5, 10, 25, 50, 100];
+        
+        if (!in_array($perPage, $allowedPerPage)) {
+            $perPage = 10;
+        }
+
+        // Ambil data rules dengan relasi
         $rules = Rule::with(['penyakit', 'ruleDetails.gejala'])
-            ->orderBy('kode_rule')
-            ->paginate(10);
-        
-        $penyakits = Penyakit::all();
-        $gejalas = Gejala::all();
-        
+            ->orderBy('kode_rule', 'asc')
+            ->paginate($perPage)
+            ->withQueryString();
+
+        // Ambil data untuk dropdown
+        $penyakits = Penyakit::orderBy('nama_penyakit', 'asc')->get();
+        $gejalas = Gejala::orderBy('kode_gejala', 'asc')->get();
+
         return view('admin.rules.index', compact('rules', 'penyakits', 'gejalas'));
     }
 

@@ -209,7 +209,7 @@
 
     /* Tombol Utama Minimalis */
     .btn-action-primary {
-        background-color: var(--text-dark, #0f172a);
+        background-color: var(--text-dark, #10b981);
         color: #ffffff;
         padding: 0.65rem 1.2rem;
         border-radius: 10px;
@@ -224,7 +224,7 @@
         flex-shrink: 0;
     }
     .btn-action-primary:hover {
-        background-color: #1e293b;
+        background-color: #10b981;
         color: #ffffff;
     }
 
@@ -396,46 +396,56 @@
 
     <div class="clean-card">
         {{-- Header Judul --}}
-        <div class="clean-header">
-            <h5 class="fw-bold text-dark mb-1" style="letter-spacing: -0.01em;">Daftar Aturan</h5>
-            {{-- === TOOLBAR: SEMUA ELEMENT RATA KANAN === --}}
-            <div class="toolbar-wrapper">
-                {{-- Search Box --}}
-                <div class="search-box">
-                    <i class="bi bi-search search-icon"></i>
-                    <input type="text" id="liveSearch" placeholder="Cari kode, nama, definisi..." autocomplete="off" />
-                    <button type="button" class="clear-search" id="clearSearch" title="Bersihkan pencarian">
-                        <i class="bi bi-x-lg"></i>
+       <div class="clean-header">
+            {{-- Baris 1: Judul dan Toolbar --}}
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-2">
+                <h5 class="fw-bold text-dark mb-0" style="letter-spacing: -0.01em;">Daftar Aturan</h5>
+                
+                <div class="d-flex align-items-center gap-3 flex-wrap">
+                    {{-- Search Box --}}
+                    <div class="search-box">
+                        <i class="bi bi-search search-icon"></i>
+                        <input type="text" id="liveSearch" placeholder="Cari kode, nama, definisi..." autocomplete="off" />
+                        <button type="button" class="clear-search" id="clearSearch" title="Bersihkan pencarian">
+                            <i class="bi bi-x-lg"></i>
+                        </button>
+                    </div>
+
+                    {{-- Show Entries --}}
+                    <div class="entries-box d-flex align-items-center gap-2">
+                        <label for="showEntries" class="mb-0">Tampilkan</label>
+                        <select id="showEntries" class="form-select form-select-sm" style="width: auto;">
+                            <option value="5">5</option>
+                            <option value="10" selected>10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                        <label class="mb-0">entri</label>
+                    </div>
+
+                    {{-- Tombol Tambah --}}
+                    <button type="button" class="btn-action-primary" data-bs-toggle="modal" data-bs-target="#modalTambahPenyakit">
+                        <i class="bi bi-plus-lg"></i> Tambah Penyakit
                     </button>
                 </div>
-    
-                {{-- Show Entries --}}
-                <div class="entries-box">
-                    <label for="showEntries">Tampilkan</label>
-                    <select id="showEntries">
-                        <option value="5">5</option>
-                        <option value="10" selected>10</option>
-                        <option value="25">25</option>
-                        <option value="50">50</option>
-                        <option value="100">100</option>
-                    </select>
-                    <label>entri</label>
-                </div>
-    
-                {{-- Tombol Tambah --}}
-                <button type="button" class="btn-action-primary" data-bs-toggle="modal" data-bs-target="#modalTambahPenyakit">
-                    <i class="bi bi-plus-lg"></i> Tambah Penyakit
-                </button>
             </div>
-    
-            {{-- Info hasil pencarian (juga rata kanan) --}}
-            <div class="search-info" id="searchInfo">
-                <span>Menampilkan <span class="badge-count" id="matchCount">0</span> hasil untuk: "<strong id="searchKeyword"></strong>"</span>
-                <i class="bi bi-funnel-fill" style="color: var(--primary-color, #10b981);"></i>
-            </div>
-            
-        </div>
 
+            {{-- Baris 2: Deskripsi dan Info Pencarian --}}
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+                <p class="text-muted mb-0" style="font-size: 0.875rem;">
+                    Pusat Penyimpanan Pengetahuan Komprehensif Penyakit dan Penanganan Sapi
+                </p>
+                
+                {{-- Info hasil pencarian (jika ada) --}}
+                <div class="search-info" id="searchInfo" style="display: none;">
+                    <span>Menampilkan <span class="badge-count" id="matchCount">0</span> hasil untuk: 
+                        "<strong id="searchKeyword"></strong>"
+                    </span>
+                    <i class="bi bi-funnel-fill" style="color: var(--primary-color, #10b981);"></i>
+                </div>
+            </div>
+        </div>
 
         <div class="table-responsive">
             <table class="table-clean" id="tablePenyakit">
@@ -513,8 +523,8 @@
         </div>
 
         {{-- === PAGINATION WRAPPER === --}}
-        <div class="pagination-wrapper" id="paginationWrapper">
-            <div id="paginationContainer">
+        <div class="pagination-wrapper ml-2" id="paginationWrapper">
+            <div id="paginationContainer ">
                 {{ $penyakits->links() }}
             </div>
         </div>

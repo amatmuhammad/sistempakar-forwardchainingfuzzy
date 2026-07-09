@@ -77,21 +77,23 @@
 
     /* Dark mode - akan diaktifkan jika body memiliki kelas .dark-mode */
     body.dark-mode {
-        --bg-body: #121212;
-        --bg-card: #1e1e2f;
-        --bg-sidebar: #1a1a2c;
+        --bg-body: #17181d;
+        --bg-card: #23262f;
+        --bg-sidebar: #1c1e24;
         --text-primary: #e9ecef;
-        --text-secondary: #adb5bd;
-        --border-color: #2d2d3a;
-        --table-header-bg: #2a2a3a;
-        --hover-bg: #2a2a3a;
+        --text-secondary: #9aa3b2;
+        --border-color: #2f333d;
+        --table-header-bg: #2a2e38;
+        --hover-bg: #2c303b;
         --progress-bg: #2c2c3a;
-        --badge-light-bg: #2d2d3f;
-        --badge-light-text: #e2e8f0;
-        --code-badge-bg: #2d2d3f;
-        --code-badge-text: #cbd5e1;
-        --btn-outline-border: #4a4a60;
-        --btn-icon-color: #adb5bd;
+        --badge-light-bg: #2d3140;
+        --badge-light-text: #d6dbe5;
+        --code-badge-bg: #2d3140;
+        --code-badge-text: #d6dbe5;
+        --btn-outline-border: #3a3f4b;
+        --btn-icon-color: #c2c8d0;
+        /* samakan tema navbar & kertas bootstrap agar ikut gelap */
+        --bs-paper-bg: var(--bg-card);
     }
 
     /* Terapkan variabel ke elemen global */
@@ -148,6 +150,24 @@
     }
     .progress {
         background-color: var(--progress-bg) !important;
+    }
+
+    /* Tombol toggle tema di navbar */
+    .theme-toggle {
+        border: 1px solid transparent;
+        background-color: transparent;
+        color: var(--text-secondary) !important;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+    .theme-toggle:hover {
+        background-color: var(--hover-bg);
+        color: var(--text-primary) !important;
+    }
+    .theme-toggle:focus {
+        outline: none;
+        box-shadow: none;
     }
 
     /* Select2, Choices.js jika digunakan */
@@ -342,10 +362,10 @@
             const textSpan = document.getElementById('themeText');
             if (icon && textSpan) {
                 if (isDark) {
-                    icon.className = 'bi bi-sun-fill me-1';
+                    icon.className = 'icon-base bi bi-sun-fill icon-md';
                     textSpan.innerText = 'Light Mode';
                 } else {
-                    icon.className = 'bi bi-moon-fill me-1';
+                    icon.className = 'icon-base bi bi-moon-fill icon-md';
                     textSpan.innerText = 'Dark Mode';
                 }
             }
@@ -418,6 +438,146 @@
     }
     .swal2-container {
         z-index: 99999 !important;
+    }
+</style>
+
+{{-- Override warna hardcoded light-mode di halaman admin (rules/gejala/penyakit/dashboard).
+     Diletakkan paling akhir agar menang !important via source-order saat dark mode aktif. --}}
+<style>
+    body.dark-mode .layout-navbar {
+        background-color: var(--bg-card) !important;
+        box-shadow: 0 1px 0 0 var(--border-color) !important;
+    }
+
+    /* === Tabel === */
+    body.dark-mode .table-clean thead th,
+    body.dark-mode .table thead th {
+        background-color: var(--table-header-bg) !important;
+        color: #aeb6c2 !important;
+        border-bottom-color: var(--border-color) !important;
+    }
+    body.dark-mode .table-clean tbody td,
+    body.dark-mode .table tbody td {
+        border-bottom-color: var(--border-color) !important;
+        color: var(--text-primary) !important;
+    }
+    body.dark-mode .table-clean tbody tr:hover,
+    body.dark-mode .table tbody tr:hover {
+        background-color: var(--hover-bg) !important;
+    }
+
+    /* === Badge kode === */
+    body.dark-mode .code-badge {
+        background-color: var(--badge-light-bg) !important;
+        color: var(--code-badge-text) !important;
+    }
+
+    /* === Tombol aksi tabel (btn-icon) === */
+    body.dark-mode .btn-icon {
+        background: var(--bg-card) !important;
+        border-color: var(--btn-outline-border) !important;
+        color: var(--btn-icon-color) !important;
+    }
+    body.dark-mode .btn-icon:hover {
+        background: var(--hover-bg) !important;
+        border-color: var(--text-secondary) !important;
+        color: var(--text-primary) !important;
+    }
+
+    /* === Tombol primary aksi === */
+    body.dark-mode .btn-action-primary {
+        background-color: #2a2f3a !important;
+        color: #ffffff !important;
+    }
+    body.dark-mode .btn-action-primary:hover {
+        background-color: #353b48 !important;
+    }
+
+    /* === Box "Show entries" === */
+    body.dark-mode .entries-box label {
+        color: var(--text-secondary) !important;
+    }
+    body.dark-mode .entries-box select {
+        background-color: var(--bg-card) !important;
+        border-color: var(--btn-outline-border) !important;
+        color: var(--text-primary) !important;
+    }
+
+    /* === Info pencarian & teks abu === */
+    body.dark-mode .search-info,
+    body.dark-mode .pagination-info {
+        color: var(--text-secondary) !important;
+    }
+    body.dark-mode .text-muted {
+        color: var(--text-secondary) !important;
+    }
+
+    /* === Pagination === */
+    body.dark-mode .pagination-wrapper .page-item .page-link {
+        color: var(--text-primary) !important;
+        background-color: var(--bg-card) !important;
+        border-color: var(--btn-outline-border) !important;
+    }
+    body.dark-mode .pagination-wrapper .page-item .page-link:hover {
+        background-color: var(--hover-bg) !important;
+        color: var(--text-primary) !important;
+    }
+    body.dark-mode .pagination-wrapper .page-item.active .page-link {
+        background-color: #3a3f4b !important;
+        border-color: #3a3f4b !important;
+        color: #ffffff !important;
+    }
+    body.dark-mode .pagination-wrapper .page-item.disabled .page-link {
+        background-color: var(--bg-card) !important;
+        border-color: var(--btn-outline-border) !important;
+        color: var(--text-secondary) !important;
+    }
+
+    /* === Choices.js (select custom) === */
+    body.dark-mode .choices__inner {
+        background-color: var(--bg-card) !important;
+        border-color: var(--btn-outline-border) !important;
+        color: var(--text-primary) !important;
+    }
+    body.dark-mode .choices__list--single .choices__item {
+        color: var(--text-primary) !important;
+    }
+    body.dark-mode .choices__list--dropdown,
+    body.dark-mode .choices__list[aria-expanded] {
+        background-color: var(--bg-card) !important;
+        border-color: var(--btn-outline-border) !important;
+    }
+    body.dark-mode .choices__list--dropdown .choices__item--selectable.is-highlighted {
+        background-color: var(--hover-bg) !important;
+    }
+    body.dark-mode .choices__list--multiple .choices__item {
+        background: var(--badge-light-bg) !important;
+        border-color: var(--btn-outline-border) !important;
+        color: var(--text-primary) !important;
+    }
+
+    /* === Form input standar === */
+    body.dark-mode .form-control,
+    body.dark-mode .form-select {
+        background-color: var(--bg-card) !important;
+        border-color: var(--btn-outline-border) !important;
+        color: var(--text-primary) !important;
+    }
+    body.dark-mode .form-control::placeholder {
+        color: var(--text-secondary) !important;
+    }
+    body.dark-mode .form-control:focus,
+    body.dark-mode .form-select:focus {
+        border-color: var(--text-secondary) !important;
+        box-shadow: 0 0 0 4px rgba(120, 130, 150, 0.15) !important;
+    }
+
+    /* === Modal header close & title === */
+    body.dark-mode .modal-title {
+        color: var(--text-primary) !important;
+    }
+    body.dark-mode .btn-close {
+        filter: invert(1) grayscale(100%) brightness(200%);
     }
 </style>
 </body>

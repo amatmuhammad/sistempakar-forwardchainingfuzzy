@@ -14,7 +14,13 @@
             
               <ul class="navbar-nav flex-row align-items-center ms-md-auto">
                 <!-- Place this tag where you want the button to render. -->
-               
+                <li class="nav-item me-2">
+                  <button type="button" id="themeToggle" class="theme-toggle nav-link d-flex align-items-center px-2" title="Ganti Tema">
+                    <i class="icon-base bi bi-moon-fill icon-md" id="themeIcon"></i>
+                    <span class="d-none d-sm-inline ms-2" id="themeText">Dark Mode</span>
+                  </button>
+                </li>
+
                 <!-- User -->
                   
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">

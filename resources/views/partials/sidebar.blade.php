@@ -1,8 +1,8 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
-  <div class="app-brand demo">
-    <a href="index.html" class="app-brand-link">
+  <div class="app-brand demo sidebar-brand">
+    <a href="index.html" class="app-brand-link w-100 d-flex justify-content-center">
       <span class="app-brand-logo demo">
-       <img src="{{ asset('assets/img/SIPAKSI (2).png') }}" alt="Logo" style="width: 300px; height: 220px;" class="img-fluid mt-5 mb-5">
+        <img src="{{ asset('assets/img/SIPAKSI (2).png') }}" alt="Logo" class="img-fluid sidebar-brand__logo">
       </span>
     </a>
 
@@ -15,7 +15,7 @@
 
   <div class="menu-inner-shadow"></div>
 
-<ul class="menu-inner py-1">
+  <ul class="menu-inner py-1 sidebar-nav">
   @can('admin')
     
       <li class="menu-item {{ Request::routeIs('dashboard') ? 'active' : '' }}">
@@ -25,7 +25,7 @@
           </a>
       </li>
 
-      <li class="menu-header small text-uppercase"><span class="menu-header-text">Manajemen Data Master</span></li>
+      <li class="menu-header small text-uppercase"><span class="menu-header-text">Manajemen Data </span></li>
       
       <li class="menu-item {{ Request::routeIs('gejala') ? 'active' : '' }}">
           <a href="{{ route('gejala') }}" class="menu-link">

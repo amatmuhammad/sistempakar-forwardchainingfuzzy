@@ -1,5 +1,4 @@
 <?php
-// app/Models/RuleDetail.php
 
 namespace App\Models;
 
@@ -8,27 +7,29 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class RuleDetail extends Model
 {
-    protected $table = 'rule_details';
-    
     protected $fillable = [
         'rule_id',
         'gejala_id',
-        'bobot'
+        'bobot',
+    ];
+
+    protected $casts = [
+        'bobot' => 'float',
     ];
 
     /**
-     * Relasi ke model Rule
+     * Relasi ke rule
      */
     public function rule(): BelongsTo
     {
-        return $this->belongsTo(Rule::class, 'rule_id');
+        return $this->belongsTo(Rule::class);
     }
 
     /**
-     * Relasi ke model Gejala
+     * Relasi ke gejala
      */
     public function gejala(): BelongsTo
     {
-        return $this->belongsTo(Gejala::class, 'gejala_id');
+        return $this->belongsTo(Gejala::class);
     }
 }

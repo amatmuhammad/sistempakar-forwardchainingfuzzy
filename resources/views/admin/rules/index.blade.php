@@ -542,7 +542,8 @@
                     <tr>
                         <th style="width: 120px;">Kode Rule</th>
                         <th>Penyakit</th>
-                        <th style="width: 120px;">Kondisi</th>
+                        <th style="width: 140px;">Kondisi</th>
+                        <th style="width: 200px;">Output Fuzzy</th>
                         <th style="width: 130px;" class="text-center">Jumlah Gejala</th>
                         <th style="width: 140px;" class="text-center">Aksi</th>
                     </tr>
@@ -553,15 +554,23 @@
                         data-search="{{ strtolower($rule->kode_rule . ' ' . ($rule->penyakit->nama_penyakit ?? '') . ' ' . $rule->kondisi_fuzzy) }}">
                         <td><span class="code-badge">{{ $rule->kode_rule }}</span></td>
                         <td class="fw-semibold">{{ $rule->penyakit->nama_penyakit ?? '-' }}</td>
-                        <td>
+                        <td class="text-center">
                             @php
                                 $color = match($rule->kondisi_fuzzy){
-                                    'Tinggi' => 'bg-danger-subtle text-danger',
-                                    'Sedang' => 'bg-warning-subtle text-warning',
-                                    default => 'bg-success-subtle text-success'
+                                    'Sangat Yakin' => 'badge bg-success text-white',
+                                    'Yakin' => 'badge bg-info text-white',
+                                    default => 'badge bg-danger text-white'
                                 };
                             @endphp
                             <span class="badge {{ $color }}">{{ $rule->kondisi_fuzzy }}</span>
+                        </td>
+                        <td>
+                            <div class="d-flex flex-wrap gap-1">
+                                <span class="badge bg-light text-dark">a : {{ number_format($rule->output_a, 0) }}</span>
+                                <span class="badge bg-light text-dark">b : {{ number_format($rule->output_b, 0) }}</span>
+                                <span class="badge bg-light text-dark">c : {{ number_format($rule->output_c, 0) }}</span>
+                                <span class="badge bg-light text-dark">d : {{ number_format($rule->output_d, 0) }}</span>
+                            </div>
                         </td>
                         <td class="text-center"><span class="text-muted">{{ $rule->ruleDetails->count() }} Gejala</span></td>
                         <td class="text-center">
@@ -595,7 +604,7 @@
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="5" class="text-center py-5 text-muted">
+                        <td colspan="6" class="text-center py-5 text-muted">
                             <i class="bi bi-inbox d-block mb-2" style="font-size: 2rem; color: #cbd5e1;"></i>
                             Belum ada data rule.
                         </td>
@@ -604,7 +613,7 @@
 
                     {{-- No Result Row --}}
                     <tr class="no-result-row" id="noResultRow">
-                        <td colspan="5" class="text-center py-5 text-muted">
+                        <td colspan="6" class="text-center py-5 text-muted">
                             <i class="bi bi-search d-block mb-2" style="font-size: 2rem; color: #cbd5e1;"></i>
                             Tidak ada data yang cocok dengan pencarian Anda.
                         </td>
@@ -642,15 +651,15 @@
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label class="form-label fw-semibold">Kode Rule <span class="text-danger">*</span></label>
-                            <input type="text" name="kode_rule" class="form-control" placeholder="Contoh: R001" required maxlength="10">
+                            <input type="text" name="kode_rule" class="form-control" placeholder="Contoh: R001" required maxlength="5">
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label fw-semibold">Kondisi Fuzzy <span class="text-danger">*</span></label>
                             <select id="kondisi_fuzzy" name="kondisi_fuzzy" required>
                                 <option value="" disabled selected>Pilih Kondisi</option>
-                                <option value="Rendah">Rendah</option>
-                                <option value="Sedang">Sedang</option>
-                                <option value="Tinggi">Tinggi</option>
+                                <option value="Tidak Yakin">Tidak Yakin</option>
+                                <option value="Yakin">Yakin</option>
+                                <option value="Sangat Yakin">Sangat Yakin</option>
                             </select>
                         </div>
                     </div>
@@ -716,15 +725,15 @@
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label class="form-label fw-semibold">Kode Rule <span class="text-danger">*</span></label>
-                            <input type="text" name="kode_rule" id="edit_kode_rule" class="form-control" required maxlength="10">
+                            <input type="text" name="kode_rule" id="edit_kode_rule" class="form-control" required maxlength="5">
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label fw-semibold">Kondisi Fuzzy <span class="text-danger">*</span></label>
                             <select id="edit_kondisi_fuzzy" name="kondisi_fuzzy" required>
                                 <option value="" disabled>Pilih Kondisi</option>
-                                <option value="Rendah">Rendah</option>
-                                <option value="Sedang">Sedang</option>
-                                <option value="Tinggi">Tinggi</option>
+                                <option value="Tidak Yakin">Tidak Yakin</option>
+                                <option value="Yakin">Yakin</option>
+                                <option value="Sangat Yakin">Sangat Yakin</option>
                             </select>
                         </div>
                     </div>
@@ -784,6 +793,16 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body px-4">
+                <div class="border rounded p-3 bg-light mb-4">
+                    <h6 class="fw-bold mb-3">Parameter Output Fuzzy</h6>
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="badge bg-dark">a = {{ number_format($rule->output_a, 2) }}</span>
+                        <span class="badge bg-dark">b = {{ number_format($rule->output_b, 2) }}</span>
+                        <span class="badge bg-dark">c = {{ number_format($rule->output_c, 2) }}</span>
+                        <span class="badge bg-dark">d = {{ number_format($rule->output_d, 2) }}</span>
+                    </div>
+                </div>
+
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <thead class="table-light">

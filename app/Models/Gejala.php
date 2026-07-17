@@ -26,4 +26,17 @@ class Gejala extends Model
     {
         return $this->hasMany(RuleDetail::class, 'gejala_id');
     }
+
+    /**
+     * Ambil parameter fuzzy sebagai array
+     */
+    public function getFuzzyParams(): array
+    {
+        return [
+            'a' => $this->fuzzy_a,
+            'b' => $this->fuzzy_b,
+            'c' => $this->fuzzy_c,
+            'd' => $this->fuzzy_d,
+        ];
+    }
 }

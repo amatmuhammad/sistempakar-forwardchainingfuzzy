@@ -106,14 +106,54 @@
     /* Sidebar (disesuaikan dengan class di layout Anda) */
     .layout-menu {
         background-color: var(--bg-sidebar) !important;
-        border-right-color: var(--border-color) !important;
+        border-right: 1px solid var(--border-color) !important;
+        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
     }
-    .menu-inner > .menu-item a {
+    .layout-menu .app-brand {
+        padding: 1rem 1rem 0.75rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+    .layout-menu .sidebar-brand__logo {
+        width: 170px;
+        max-height: 110px;
+        object-fit: contain;
+        display: block;
+        margin: 0 auto;
+    }
+    .layout-menu .menu-inner {
+        padding: 0.75rem 0.8rem 1rem;
+    }
+    .layout-menu .menu-header {
+        margin: 0.8rem 0.35rem 0.45rem;
+        padding: 0.25rem 0.25rem 0.4rem;
+        font-size: 0.72rem;
+        letter-spacing: 0.14em;
         color: var(--text-secondary) !important;
+        font-weight: 700;
     }
-    .menu-inner > .menu-item.active > a {
+    .layout-menu .menu-item .menu-link {
+        margin: 0.2rem 0;
+        padding: 0.8rem 0.9rem;
+        border-radius: 12px;
+        border: 1px solid transparent;
+        color: var(--text-secondary) !important;
+        transition: all 0.2s ease;
+    }
+    .layout-menu .menu-item .menu-link:hover,
+    .layout-menu .menu-item.active > .menu-link {
         background-color: var(--hover-bg) !important;
         color: var(--text-primary) !important;
+        border-color: var(--border-color);
+        box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+    }
+    .layout-menu .menu-item .menu-link .menu-icon {
+        color: inherit;
+        font-size: 1rem;
+        margin-right: 0.75rem;
+    }
+    .layout-menu .menu-divider {
+        border-color: var(--border-color) !important;
+        margin: 0.25rem 1rem 0;
     }
 
     /* Card, modal, info card */

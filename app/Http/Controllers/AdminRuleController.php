@@ -42,9 +42,9 @@ class AdminRuleController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'kode_rule'      => 'required|string|max:10|unique:rules,kode_rule',
+            'kode_rule'      => 'required|string|max:5|unique:rules,kode_rule',
             'penyakit_id'    => 'required|exists:penyakit,id',
-            'kondisi_fuzzy'  => 'required|in:Rendah,Sedang,Tinggi',
+            'kondisi_fuzzy'  => 'required|in:Tidak Yakin,Yakin,Sangat Yakin',
             'gejala'         => 'required|array|min:1',
             'gejala.*.id'    => 'required|exists:gejala,id',
             'gejala.*.bobot' => 'required|numeric|min:0|max:1',
@@ -72,9 +72,9 @@ class AdminRuleController extends Controller
         $rule = Rule::findOrFail($id);
         
         $request->validate([
-            'kode_rule'      => 'required|string|max:10|unique:rules,kode_rule,' . $id,
+            'kode_rule'      => 'required|string|max:5|unique:rules,kode_rule,' . $id,
             'penyakit_id'    => 'required|exists:penyakit,id',
-            'kondisi_fuzzy'  => 'required|in:Rendah,Sedang,Tinggi',
+            'kondisi_fuzzy'  => 'required|in:Tidak Yakin,Yakin,Sangat Yakin',
             'gejala'         => 'required|array|min:1',
             'gejala.*.id'    => 'required|exists:gejala,id',
             'gejala.*.bobot' => 'required|numeric|min:0|max:1',

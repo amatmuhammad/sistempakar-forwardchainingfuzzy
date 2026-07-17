@@ -11,7 +11,11 @@ return new class extends Migration {
             $table->id();
             $table->string('kode_rule', 5)->unique();
             $table->foreignId('penyakit_id')->constrained('penyakit')->onDelete('cascade');
-            $table->enum('kondisi_fuzzy', ['Rendah', 'Sedang', 'Tinggi']);
+            $table->enum('kondisi_fuzzy', ['Tidak Yakin', 'Yakin', 'Sangat Yakin']);
+            $table->double('output_a')->default(0);
+            $table->double('output_b')->default(0);
+            $table->double('output_c')->default(0);
+            $table->double('output_d')->default(0);
             $table->timestamps();
         });
     }

@@ -813,13 +813,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($rule->ruleDetails as $detail)
+                            @forelse($rule->ruleDetails as $detail)
                             <tr>
-                                <td><span class="code-badge">{{ $detail->gejala->kode_gejala }}</span></td>
-                                <td>{{ $detail->gejala->nama_gejala }}</td>
+                                <td><span class="code-badge">{{ $detail->gejala->kode_gejala ?? '-' }}</span></td>
+                                <td>{{ $detail->gejala->nama_gejala ?? '-' }}</td>
                                 <td class="text-center"><span class="badge bg-dark">{{ number_format($detail->bobot, 1) }}</span></td>
                             </tr>
-                            @endforeach
+                            @empty
+                            <tr>
+                                <td colspan="3" class="text-center text-muted py-3">Belum ada data gejala untuk rule ini.</td>
+                            </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
@@ -1357,7 +1361,7 @@
                 const kondisi = this.getAttribute('data-kondisi');
                 const gejala = JSON.parse(this.getAttribute('data-gejala'));
 
-                document.getElementById('formEditRule').setAttribute('action', `/rules/${id}`);
+                document.getElementById('formEditRule').setAttribute('action', `/rules/update/${id}`);
                 document.getElementById('edit_kode_rule').value = kode;
                 
                 if (choicesEditPenyakit) {

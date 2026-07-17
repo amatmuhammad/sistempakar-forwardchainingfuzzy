@@ -6,6 +6,7 @@ use App\Http\Controllers\DiagnosaController;
 use App\Http\Controllers\AdminPenyakitController;
 use App\Http\Controllers\AdminGejalaController;
 use App\Http\Controllers\AdminRuleController;
+use App\Http\Controllers\AdminRuleDetailController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,7 +28,7 @@ Route::middleware(['auth', 'can:admin'])->group(function () {
     Route::post('/penyakit/store', [AdminPenyakitController::class, 'store'])->name('penyakit.store');
     Route::get('/penyakit/{penyakit}', [AdminPenyakitController::class, 'show'])->name('show');
     Route::get('/penyakit/{penyakit}/edit', [AdminPenyakitController::class, 'edit'])->name('edit');
-    Route::put('/penyakit/update/{id}', [AdminPenyakitController::class, 'update'])->name('update');
+    Route::put('/penyakit/update/{id}', [AdminPenyakitController::class, 'update'])->name('penyakit.update');
     Route::delete('/penyakit/destroy/{id}', [AdminPenyakitController::class, 'destroy'])->name('penyakit.destroy');
     // Route::resource('penyakit', AdminPenyakitController::class)->names('admin.penyakit');
     // gejala
@@ -49,6 +50,11 @@ Route::middleware(['auth', 'can:admin'])->group(function () {
     Route::get('/rules/{rule}/edit', [AdminRuleController::class, 'edit'])->name('rules.edit');
     Route::put('/rules/update/{id}', [AdminRuleController::class, 'update'])->name('rules.update');
     Route::delete('/rules/destroy/{id}', [AdminRuleController::class, 'destroy'])->name('rules.destroy');
+
+    Route::get('/rule-details', [AdminRuleDetailController::class, 'index'])->name('rule-details');
+    Route::post('/rule-details', [AdminRuleDetailController::class, 'store'])->name('rule-details.store');
+    Route::put('/rule-details/{id}', [AdminRuleDetailController::class, 'update'])->name('rule-details.update');
+    Route::delete('/rule-details/{id}', [AdminRuleDetailController::class, 'destroy'])->name('rule-details.destroy');
 
     // diagnosa
 

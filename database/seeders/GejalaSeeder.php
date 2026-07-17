@@ -11,50 +11,35 @@ class GejalaSeeder extends Seeder
     public function run()
     {
         $gejala = [
-            // Penyakit 1: Septicemia Epizootica (G001-G004)
             ['kode_gejala' => 'G001', 'nama_gejala' => 'Membengkaknya kulit kepala dan selaput lender lidah disertai warna merah dan kebiruan', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.6, 'fuzzy_c' => 0.8, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G002', 'nama_gejala' => 'Membengkaknya leher, anus, vulva dan paru-paru meradang', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.6, 'fuzzy_c' => 0.8, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G003', 'nama_gejala' => 'Selaput lender usus dan perut masam serta berwarna merah tua', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.6, 'fuzzy_c' => 0.8, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G004', 'nama_gejala' => 'Sapi mati dalam waktu 12-36 jam pada kondisi parah', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.7, 'fuzzy_c' => 0.9, 'fuzzy_d' => 1.0],
-            
-            // Penyakit 2: Anthraks (G005-G010)
-            ['kode_gejala' => 'G005', 'nama_gejala' => 'Radang pada bagian limpa dan diare', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.5, 'fuzzy_c' => 0.7, 'fuzzy_d' => 1.0],
+            ['kode_gejala' => 'G005', 'nama_gejala' => 'Radang pada bagian limpa dan akhirnya sapi menjadi diare', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.5, 'fuzzy_c' => 0.7, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G006', 'nama_gejala' => 'Darah tidak membeku', 'fuzzy_a' => 0.7, 'fuzzy_b' => 0.9, 'fuzzy_c' => 1.0, 'fuzzy_d' => 1.0],
-            ['kode_gejala' => 'G007', 'nama_gejala' => 'Pendarahan di lubang hidung, mulut, pori-pori, dan anus berwarna hitam', 'fuzzy_a' => 0.6, 'fuzzy_b' => 0.8, 'fuzzy_c' => 0.9, 'fuzzy_d' => 1.0],
+            ['kode_gejala' => 'G007', 'nama_gejala' => 'Banyak pendarahan di beberapa bagian tubuh berwarna hitam (hidung, mulut, pori-pori, anus)', 'fuzzy_a' => 0.6, 'fuzzy_b' => 0.8, 'fuzzy_c' => 0.9, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G008', 'nama_gejala' => 'Nafas tidak teratur', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.4, 'fuzzy_c' => 0.6, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G009', 'nama_gejala' => 'Bengkak pada area bawah perut', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.5, 'fuzzy_c' => 0.7, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G010', 'nama_gejala' => 'Sapi mati mendadak pada kondisi akut', 'fuzzy_a' => 0.6, 'fuzzy_b' => 0.8, 'fuzzy_c' => 0.9, 'fuzzy_d' => 1.0],
-            
-            // Penyakit 3: ParaTuberculosis (G011-G014)
             ['kode_gejala' => 'G011', 'nama_gejala' => 'Penurunan berat badan (kurus)', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.6, 'fuzzy_c' => 0.8, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G012', 'nama_gejala' => 'Edema di daerah bawah rahang', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.6, 'fuzzy_c' => 0.8, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G013', 'nama_gejala' => 'Mencret tidak berbau', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.5, 'fuzzy_c' => 0.7, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G014', 'nama_gejala' => 'Penurunan produksi susu', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.4, 'fuzzy_c' => 0.6, 'fuzzy_d' => 1.0],
-            
-            // Penyakit 4: Keluron (G015-G017)
             ['kode_gejala' => 'G015', 'nama_gejala' => 'Keguguran pada bulan ke 5-8 kehamilan', 'fuzzy_a' => 0.7, 'fuzzy_b' => 0.9, 'fuzzy_c' => 1.0, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G016', 'nama_gejala' => 'Mengeluarkan cairan vaginal infeksius berwarna keruh', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.6, 'fuzzy_c' => 0.8, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G017', 'nama_gejala' => 'Epididymitis dan orchitis pada sapi jantan', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.5, 'fuzzy_c' => 0.7, 'fuzzy_d' => 1.0],
-            
-            // Penyakit 5: Tuberculosis (G018-G023)
             ['kode_gejala' => 'G018', 'nama_gejala' => 'Pembengkakan kelenjar getah bening', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.6, 'fuzzy_c' => 0.8, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G019', 'nama_gejala' => 'Berat badan turun perlahan walau makan normal', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.6, 'fuzzy_c' => 0.8, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G020', 'nama_gejala' => 'Hidung mengeluarkan cairan', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.4, 'fuzzy_c' => 0.6, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G021', 'nama_gejala' => 'Napas berat dan batuk berdarah ringan', 'fuzzy_a' => 0.6, 'fuzzy_b' => 0.8, 'fuzzy_c' => 0.9, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G022', 'nama_gejala' => 'Batuk kronis', 'fuzzy_a' => 0.6, 'fuzzy_b' => 0.8, 'fuzzy_c' => 0.9, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G023', 'nama_gejala' => 'Sesak nafas dan berbunyi', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.6, 'fuzzy_c' => 0.8, 'fuzzy_d' => 1.0],
-            
-            // Penyakit 6: Botulismus (G024-G025)
             ['kode_gejala' => 'G024', 'nama_gejala' => 'Kelumpuhan total secara perlahan', 'fuzzy_a' => 0.6, 'fuzzy_b' => 0.8, 'fuzzy_c' => 0.9, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G025', 'nama_gejala' => 'Kesulitan menelan, ngiler, dan mata terbelalak', 'fuzzy_a' => 0.6, 'fuzzy_b' => 0.8, 'fuzzy_c' => 0.9, 'fuzzy_d' => 1.0],
-            
-            // Penyakit 7: Mastitis (G026-G029)
             ['kode_gejala' => 'G026', 'nama_gejala' => 'Kelenjar air susu membengkak dan keras', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.6, 'fuzzy_c' => 0.8, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G027', 'nama_gejala' => 'Kelenjar air susu merah, panas, dan terasa sakit saat diraba', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.5, 'fuzzy_c' => 0.7, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G028', 'nama_gejala' => 'Air susu encer bercampur nanah', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.6, 'fuzzy_c' => 0.8, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G029', 'nama_gejala' => 'Sapi tampak tidak nyaman saat berjalan', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.3, 'fuzzy_c' => 0.5, 'fuzzy_d' => 1.0],
-            
-            // Penyakit 8: Tetanus (G030-G037)
             ['kode_gejala' => 'G030', 'nama_gejala' => 'Kakunya pergerakan kelopak mata', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.6, 'fuzzy_c' => 0.8, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G031', 'nama_gejala' => 'Kakunya pergerakan telinga', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.6, 'fuzzy_c' => 0.8, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G032', 'nama_gejala' => 'Kakunya pergerakan tulang punggung', 'fuzzy_a' => 0.6, 'fuzzy_b' => 0.8, 'fuzzy_c' => 0.9, 'fuzzy_d' => 1.0],
@@ -63,14 +48,10 @@ class GejalaSeeder extends Seeder
             ['kode_gejala' => 'G035', 'nama_gejala' => 'Ekor kaku dan terangkat', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.6, 'fuzzy_c' => 0.8, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G036', 'nama_gejala' => 'Sulit mengunyah dan menelan', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.6, 'fuzzy_c' => 0.8, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G037', 'nama_gejala' => 'Sangat sensitif terhadap suara/cahaya', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.6, 'fuzzy_c' => 0.8, 'fuzzy_d' => 1.0],
-            
-            // Penyakit 9: Erysipelas (G038-G041)
             ['kode_gejala' => 'G038', 'nama_gejala' => 'Radang sendi (arthritis)', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.5, 'fuzzy_c' => 0.7, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G039', 'nama_gejala' => 'Pincang/kaku berjalan', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.5, 'fuzzy_c' => 0.7, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G040', 'nama_gejala' => 'Gangguan jantung (endokarditis kronis)', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.4, 'fuzzy_c' => 0.6, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G041', 'nama_gejala' => 'Lesi kulit berbentuk belah ketupat (diamond skin)', 'fuzzy_a' => 0.7, 'fuzzy_b' => 0.9, 'fuzzy_c' => 1.0, 'fuzzy_d' => 1.0],
-            
-            // Penyakit 10: Leptospirosis (G042-G048)
             ['kode_gejala' => 'G042', 'nama_gejala' => 'Anemia', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.3, 'fuzzy_c' => 0.5, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G043', 'nama_gejala' => 'Tremor otot (muscle tremor)', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.2, 'fuzzy_c' => 0.4, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G044', 'nama_gejala' => 'Urin berwarna merah/coklat (hemoglobinuria)', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.6, 'fuzzy_c' => 0.8, 'fuzzy_d' => 1.0],
@@ -78,16 +59,12 @@ class GejalaSeeder extends Seeder
             ['kode_gejala' => 'G046', 'nama_gejala' => 'Ikterus (mata/kulit kekuningan)', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.5, 'fuzzy_c' => 0.7, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G047', 'nama_gejala' => 'Lahir anak lemah atau mati', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.1, 'fuzzy_c' => 0.2, 'fuzzy_d' => 0.5],
             ['kode_gejala' => 'G048', 'nama_gejala' => 'Infertilitas', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.4, 'fuzzy_c' => 0.6, 'fuzzy_d' => 1.0],
-            
-            // Penyakit 11: Listeriosis (G049-G054)
             ['kode_gejala' => 'G049', 'nama_gejala' => 'Demam tinggi (kejang-kejang)', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.6, 'fuzzy_c' => 0.8, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G050', 'nama_gejala' => 'Keguguran di kehamilan 5-8 bulan', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.5, 'fuzzy_c' => 0.7, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G051', 'nama_gejala' => 'Depresi / menyendiri', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.5, 'fuzzy_c' => 0.7, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G052', 'nama_gejala' => 'Mata juling / buta sementara', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.6, 'fuzzy_c' => 0.8, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G053', 'nama_gejala' => 'Berbaring terus (tidak mau berdiri)', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.6, 'fuzzy_c' => 0.8, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G054', 'nama_gejala' => 'Sempoyongan (gangguan saraf)', 'fuzzy_a' => 0.6, 'fuzzy_b' => 0.8, 'fuzzy_c' => 0.9, 'fuzzy_d' => 1.0],
-            
-            // Penyakit 12: Rabies (G055-G061)
             ['kode_gejala' => 'G055', 'nama_gejala' => 'Sulit minum', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.6, 'fuzzy_c' => 0.8, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G056', 'nama_gejala' => 'Hewan menjadi ganas/agresif', 'fuzzy_a' => 0.6, 'fuzzy_b' => 0.8, 'fuzzy_c' => 0.9, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G057', 'nama_gejala' => 'Suka mengigit dan meronta jika diikat', 'fuzzy_a' => 0.6, 'fuzzy_b' => 0.8, 'fuzzy_c' => 0.9, 'fuzzy_d' => 1.0],
@@ -95,8 +72,6 @@ class GejalaSeeder extends Seeder
             ['kode_gejala' => 'G059', 'nama_gejala' => 'Makan benda bukan makanan (pica)', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.5, 'fuzzy_c' => 0.7, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G060', 'nama_gejala' => 'Gangguan saraf dan kelumpuhan', 'fuzzy_a' => 0.6, 'fuzzy_b' => 0.8, 'fuzzy_c' => 0.9, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G061', 'nama_gejala' => 'Air liur berlebihan dan sulit menelan', 'fuzzy_a' => 0.7, 'fuzzy_b' => 0.9, 'fuzzy_c' => 1.0, 'fuzzy_d' => 1.0],
-            
-            // Penyakit 13: PMK (G062-G068)
             ['kode_gejala' => 'G062', 'nama_gejala' => 'Luka lepuh di mulut dan area kuku', 'fuzzy_a' => 0.6, 'fuzzy_b' => 0.8, 'fuzzy_c' => 0.9, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G063', 'nama_gejala' => 'Sapi sering menggeretak gigi', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.5, 'fuzzy_c' => 0.7, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G064', 'nama_gejala' => 'Sering menjulurkan lidah', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.5, 'fuzzy_c' => 0.7, 'fuzzy_d' => 1.0],
@@ -104,35 +79,25 @@ class GejalaSeeder extends Seeder
             ['kode_gejala' => 'G066', 'nama_gejala' => 'Bibir dan gusi merah, kering, panas', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.6, 'fuzzy_c' => 0.8, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G067', 'nama_gejala' => 'Dari mulut keluar ludah seperti benang', 'fuzzy_a' => 0.6, 'fuzzy_b' => 0.8, 'fuzzy_c' => 0.9, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G068', 'nama_gejala' => 'Pergelangan kaki dekat kuku bengkak', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.5, 'fuzzy_c' => 0.7, 'fuzzy_d' => 1.0],
-            
-            // Penyakit 14: SURRA (G069-G072)
             ['kode_gejala' => 'G069', 'nama_gejala' => 'Gerakan tidak beraturan (jalan berputar/mubeng) dan kejang-kejang', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.6, 'fuzzy_c' => 0.8, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G070', 'nama_gejala' => 'Selaput lendir pucat atau kekuningan', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.5, 'fuzzy_c' => 0.7, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G071', 'nama_gejala' => 'Demam berulang', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.3, 'fuzzy_c' => 0.5, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G072', 'nama_gejala' => 'Pembengkakan tubuh (edema)', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.5, 'fuzzy_c' => 0.7, 'fuzzy_d' => 1.0],
-            
-            // Penyakit 15: Kuku Busuk (G073-G076)
             ['kode_gejala' => 'G073', 'nama_gejala' => 'Celah kuku dan tumit membengkak', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.5, 'fuzzy_c' => 0.7, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G074', 'nama_gejala' => 'Keluar cairan kuning berbau busuk', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.6, 'fuzzy_c' => 0.8, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G075', 'nama_gejala' => 'Mengelupasnya selaput pada kuku karena matinya jaringan', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.5, 'fuzzy_c' => 0.7, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G076', 'nama_gejala' => 'Pincang jelas saat berjalan', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.6, 'fuzzy_c' => 0.8, 'fuzzy_d' => 1.0],
-            
-            // Penyakit 16: Kembung Perut (G077-G081)
             ['kode_gejala' => 'G077', 'nama_gejala' => 'Perut sebelah kiri membesar karena gas', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.6, 'fuzzy_c' => 0.8, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G078', 'nama_gejala' => 'Pernapasan terganggu/nafas cepat', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.2, 'fuzzy_c' => 0.4, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G079', 'nama_gejala' => 'Sapi gelisah dan tidak mau makan', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.5, 'fuzzy_c' => 0.7, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G080', 'nama_gejala' => 'Gerakan kurang lincah dan terjatuh', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.5, 'fuzzy_c' => 0.7, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G081', 'nama_gejala' => 'Sapi lumpuh dan mati pada kondisi parah', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.6, 'fuzzy_c' => 0.8, 'fuzzy_d' => 1.0],
-            
-            // Penyakit 17: Demam Tiga Hari (G082-G087)
             ['kode_gejala' => 'G082', 'nama_gejala' => 'Otot kaku dan nyeri', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.5, 'fuzzy_c' => 0.7, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G083', 'nama_gejala' => 'Tidak dapat berdiri', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.6, 'fuzzy_c' => 0.8, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G084', 'nama_gejala' => 'Sesak dan gemetar', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.3, 'fuzzy_c' => 0.5, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G085', 'nama_gejala' => 'Keluar cairan di mata dan hidung', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.5, 'fuzzy_c' => 0.7, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G086', 'nama_gejala' => 'Denyut jantung meningkat', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.5, 'fuzzy_c' => 0.7, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G087', 'nama_gejala' => 'Produksi susu menurun pada sapi perah', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.4, 'fuzzy_c' => 0.6, 'fuzzy_d' => 1.0],
-            
-            // Penyakit 18: Ingusan (G088-G094)
             ['kode_gejala' => 'G088', 'nama_gejala' => 'Cairan pada hidung dan mata dari encer ke kental', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.5, 'fuzzy_c' => 0.7, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G089', 'nama_gejala' => 'Meneteskan air liur', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.3, 'fuzzy_c' => 0.5, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G090', 'nama_gejala' => 'Bagian moncong kering dan keluar nanah', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.6, 'fuzzy_c' => 0.8, 'fuzzy_d' => 1.0],
@@ -140,14 +105,10 @@ class GejalaSeeder extends Seeder
             ['kode_gejala' => 'G092', 'nama_gejala' => 'Mata keruh dan cenderung memutih (kebutaan)', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.6, 'fuzzy_c' => 0.8, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G093', 'nama_gejala' => 'Kulit mengelupas dan luka pada wajah/kepala', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.4, 'fuzzy_c' => 0.6, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G094', 'nama_gejala' => 'Menjadi kurus lalu mati', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.1, 'fuzzy_c' => 0.2, 'fuzzy_d' => 0.5],
-            
-            // Penyakit 19: Kudis (G095-G098)
-            ['kode_gejala' => 'G095', 'nama_gejala' => 'Sapi sering menggigit bagian tubuh', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.6, 'fuzzy_c' => 0.8, 'fuzzy_d' => 1.0],
-            ['kode_gejala' => 'G096', 'nama_gejala' => 'Sering menggosokkan badan di kandang (menggaruk)', 'fuzzy_a' => 0.6, 'fuzzy_b' => 0.8, 'fuzzy_c' => 0.9, 'fuzzy_d' => 1.0],
+            ['kode_gejala' => 'G095', 'nama_gejala' => 'Sering menggigit bagian tubuh', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.6, 'fuzzy_c' => 0.8, 'fuzzy_d' => 1.0],
+            ['kode_gejala' => 'G096', 'nama_gejala' => 'Menggosokkan badan di kandang (menggaruk)', 'fuzzy_a' => 0.6, 'fuzzy_b' => 0.8, 'fuzzy_c' => 0.9, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G097', 'nama_gejala' => 'Bulu rontok dan nanah mulai muncul di badan', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.6, 'fuzzy_c' => 0.8, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G098', 'nama_gejala' => 'Timbul kerak berwarna abu-abu dan terkesan kaku', 'fuzzy_a' => 0.6, 'fuzzy_b' => 0.8, 'fuzzy_c' => 0.9, 'fuzzy_d' => 1.0],
-            
-            // Penyakit 20: Cacingan (G099-G106)
             ['kode_gejala' => 'G099', 'nama_gejala' => 'Tidak nafsu makan', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.3, 'fuzzy_c' => 0.5, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G100', 'nama_gejala' => 'Kurus dari hari ke hari', 'fuzzy_a' => 0.6, 'fuzzy_b' => 0.8, 'fuzzy_c' => 0.9, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G101', 'nama_gejala' => 'Dehidrasi (mulut dan hidung kering)', 'fuzzy_a' => 0.1, 'fuzzy_b' => 0.5, 'fuzzy_c' => 0.7, 'fuzzy_d' => 1.0],
@@ -157,7 +118,7 @@ class GejalaSeeder extends Seeder
             ['kode_gejala' => 'G105', 'nama_gejala' => 'Pertumbuhan lambat', 'fuzzy_a' => 0.7, 'fuzzy_b' => 0.9, 'fuzzy_c' => 1.0, 'fuzzy_d' => 1.0],
             ['kode_gejala' => 'G106', 'nama_gejala' => 'Bulu kusam dan berdiri', 'fuzzy_a' => 0.6, 'fuzzy_b' => 0.8, 'fuzzy_c' => 0.9, 'fuzzy_d' => 1.0],
         ];
-        
+
         foreach ($gejala as $g) {
             Gejala::create($g);
         }

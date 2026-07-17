@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use Database\Seeders\GejalaSeeder;
 use Database\Seeders\PenyakitSeeder;
 use Database\Seeders\RulesSeeder;
+use Database\Seeders\RuleDetailSeeder;
+use Doctrine\Inflector\Rules\English\Rules;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -24,6 +26,7 @@ class DatabaseSeeder extends Seeder
             PenyakitSeeder::class,
             RulesSeeder::class,
             UserSeeder::class,
+            RuleDetailSeeder::class,
         ]);
     }
 }

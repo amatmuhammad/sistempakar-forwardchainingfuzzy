@@ -485,6 +485,7 @@
                                             data-bs-toggle="modal" 
                                             data-bs-target="#modalEditPenyakit"
                                             data-id="{{ $penyakit->id }}"
+                                            data-update-url="{{ route('penyakit.update', ['id' => $penyakit->id]) }}"
                                             data-kode="{{ $penyakit->kode_penyakit }}"
                                             data-nama="{{ $penyakit->nama_penyakit }}"
                                             data-definisi="{{ $penyakit->definisi }}"
@@ -707,58 +708,64 @@
             });
         });
 
-        searchInput.addEventListener('input', function() {
-            const query = this.value.toLowerCase().trim();
-            clearBtn.style.display = query.length > 0 ? 'block' : 'none';
+        if (searchInput) {
+            searchInput.addEventListener('input', function() {
+                const query = this.value.toLowerCase().trim();
+                if (clearBtn) {
+                    clearBtn.style.display = query.length > 0 ? 'block' : 'none';
+                }
 
-            let visibleCount = 0;
+                let visibleCount = 0;
 
-            dataRows.forEach((row, rowIndex) => {
-                const searchData = row.getAttribute('data-search');
-                const isMatch = query === '' || searchData.includes(query);
+                dataRows.forEach((row, rowIndex) => {
+                    const searchData = row.getAttribute('data-search');
+                    const isMatch = query === '' || searchData.includes(query);
 
-                if (isMatch) {
-                    row.classList.remove('search-hidden');
-                    row.classList.add('search-match');
-                    visibleCount++;
-                    if (query.length > 0) {
-                        highlightRow(row, rowIndex, query);
+                    if (isMatch) {
+                        row.classList.remove('search-hidden');
+                        row.classList.add('search-match');
+                        visibleCount++;
+                        if (query.length > 0) {
+                            highlightRow(row, rowIndex, query);
+                        } else {
+                            restoreRow(row, rowIndex);
+                        }
                     } else {
+                        row.classList.add('search-hidden');
+                        row.classList.remove('search-match');
                         restoreRow(row, rowIndex);
                     }
+                });
+
+                if (query.length > 0) {
+                    if (searchInfo) searchInfo.classList.add('active');
+                    if (matchCount) matchCount.textContent = visibleCount;
+                    if (searchKeyword) searchKeyword.textContent = this.value.trim();
                 } else {
-                    row.classList.add('search-hidden');
-                    row.classList.remove('search-match');
-                    restoreRow(row, rowIndex);
+                    if (searchInfo) searchInfo.classList.remove('active');
+                    dataRows.forEach((row, rowIndex) => {
+                        row.classList.remove('search-hidden', 'search-match');
+                        restoreRow(row, rowIndex);
+                    });
                 }
+
+                if (visibleCount === 0 && query.length > 0) {
+                    if (noResultRow) noResultRow.classList.add('active');
+                } else {
+                    if (noResultRow) noResultRow.classList.remove('active');
+                }
+
+                updatePaginationInfo();
             });
 
-            if (query.length > 0) {
-                searchInfo.classList.add('active');
-                matchCount.textContent = visibleCount;
-                searchKeyword.textContent = this.value.trim();
-            } else {
-                searchInfo.classList.remove('active');
-                dataRows.forEach((row, rowIndex) => {
-                    row.classList.remove('search-hidden', 'search-match');
-                    restoreRow(row, rowIndex);
+            if (clearBtn) {
+                clearBtn.addEventListener('click', function() {
+                    searchInput.value = '';
+                    searchInput.dispatchEvent(new Event('input'));
+                    searchInput.focus();
                 });
             }
-
-            if (visibleCount === 0 && query.length > 0) {
-                noResultRow.classList.add('active');
-            } else {
-                noResultRow.classList.remove('active');
-            }
-
-            updatePaginationInfo();
-        });
-
-        clearBtn.addEventListener('click', function() {
-            searchInput.value = '';
-            searchInput.dispatchEvent(new Event('input'));
-            searchInput.focus();
-        });
+        }
 
         function highlightRow(row, rowIndex, query) {
             const cells = row.querySelectorAll('td');
@@ -897,7 +904,9 @@
             const totalRows = dataRows.length;
             const visibleRows = document.querySelectorAll('.data-row:not(.search-hidden)').length;
 
-            if (searchInput.value.trim().length > 0) {
+            if (!infoEl) return;
+
+            if (searchInput && searchInput.value.trim().length > 0) {
                 infoEl.textContent = `Ditemukan ${visibleRows} dari ${totalRows} data`;
                 return;
             }
@@ -921,41 +930,36 @@
         // =============================================
         // JS BINDING 1: MODAL DETAIL
         // =============================================
-        const detailButtons = document.querySelectorAll('.btn-detail');
-        detailButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                document.getElementById('detail_kode').innerText = this.getAttribute('data-kode');
-                document.getElementById('detail_nama').innerText = this.getAttribute('data-nama');
-                document.getElementById('detail_definisi').innerText = this.getAttribute('data-definisi') || '-';
-                document.getElementById('detail_saran').innerText = this.getAttribute('data-saran') || '-';
-            });
-        });
+       document.addEventListener('click', function(e) {
+        // MODAL DETAIL
+        const detailBtn = e.target.closest('.btn-detail');
+        if (detailBtn) {
+            document.getElementById('detail_kode').textContent = detailBtn.getAttribute('data-kode') || '-';
+            document.getElementById('detail_nama').textContent = detailBtn.getAttribute('data-nama') || '-';
+            document.getElementById('detail_definisi').textContent = detailBtn.getAttribute('data-definisi') || '-';
+            document.getElementById('detail_saran').textContent = detailBtn.getAttribute('data-saran') || '-';
+            return;
+        }
 
-        // =============================================
-        // JS BINDING 2: MODAL EDIT
-        // =============================================
-        const editButtons = document.querySelectorAll('.btn-edit');
-        editButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const id = this.getAttribute('data-id');
-                document.getElementById('edit_kode').value = this.getAttribute('data-kode');
-                document.getElementById('edit_nama').value = this.getAttribute('data-nama');
-                document.getElementById('edit_definisi').value = this.getAttribute('data-definisi');
-                document.getElementById('edit_saran').value = this.getAttribute('data-saran');
-                document.getElementById('formEditPenyakit').setAttribute('action', `/admin/penyakit/${id}`);
-            });
-        });
+         // MODAL EDIT
+        const editBtn = e.target.closest('.btn-edit');
+        if (editBtn) {
+            document.getElementById('edit_kode').value = editBtn.getAttribute('data-kode') || '';
+            document.getElementById('edit_nama').value = editBtn.getAttribute('data-nama') || '';
+            document.getElementById('edit_definisi').value = editBtn.getAttribute('data-definisi') || '';
+            document.getElementById('edit_saran').value = editBtn.getAttribute('data-saran') || '';
+            document.getElementById('formEditPenyakit').setAttribute('action', editBtn.getAttribute('data-update-url'));
+            return;
+        }
 
-        // =============================================
-        // JS BINDING 3: KONFIRMASI DELETE
-        // =============================================
-        const deleteButtons = document.querySelectorAll('.btn-trigger-delete');
-        deleteButtons.forEach(button => {
-            button.addEventListener('click', function(e) {
-                const form = this.closest('.form-delete');
+        // KONFIRMASI DELETE
+            const deleteBtn = e.target.closest('.btn-trigger-delete');
+            if (deleteBtn) {
+                e.preventDefault();
+                const form = deleteBtn.closest('.form-delete');
                 Swal.fire({
                     title: 'Apakah Anda Yakin?',
-                    text: "Data master penyakit ini akan dihapus permanen dari sistem!",
+                    text: 'Data master penyakit ini akan dihapus permanen!',
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#ef4444',
@@ -965,9 +969,11 @@
                     background: '#ffffff',
                     customClass: { popup: 'rounded-4' }
                 }).then((result) => {
-                    if (result.isConfirmed) form.submit();
+                    if (result.isConfirmed && form) {
+                        form.submit();
+                    }
                 });
-            });
+            }
         });
     });
 </script>

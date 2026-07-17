@@ -1,194 +1,125 @@
 <?php
+// database/seeders/RuleSeeder.php
 
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use App\Models\Rule;
+use App\Models\Penyakit;
 
 class RulesSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
+    public function run()
     {
-        // Data rule dengan parameter output fuzzy
-        $rules = [
-            // ===== PENYAKIT 1: Septicemia Epizootica (Ngorok) =====
-            [
-                'kode_rule'     => 'R001',
-                'penyakit_id'   => 1, // Sesuaikan dengan ID penyakit
-                'kondisi_fuzzy' => 'Sangat Yakin',
-                'output_a'      => 55,
-                'output_b'      => 75,
-                'output_c'      => 100,
-                'output_d'      => 100,
-                'details'       => [
-                    ['gejala_id' => 1, 'bobot' => 0.8],  // G001
-                    ['gejala_id' => 2, 'bobot' => 0.7],  // G002
-                    ['gejala_id' => 3, 'bobot' => 0.7],  // G003
-                    ['gejala_id' => 4, 'bobot' => 0.8],  // G004
-                ],
-            ],
-            [
-                'kode_rule'     => 'R002',
-                'penyakit_id'   => 1,
-                'kondisi_fuzzy' => 'Yakin',
-                'output_a'      => 25,
-                'output_b'      => 45,
-                'output_c'      => 55,
-                'output_d'      => 75,
-                'details'       => [
-                    ['gejala_id' => 1, 'bobot' => 0.6],
-                    ['gejala_id' => 2, 'bobot' => 0.7],
-                ],
-            ],
-            [
-                'kode_rule'     => 'R003',
-                'penyakit_id'   => 1,
-                'kondisi_fuzzy' => 'Tidak Yakin',
-                'output_a'      => 0,
-                'output_b'      => 0,
-                'output_c'      => 25,
-                'output_d'      => 45,
-                'details'       => [
-                    ['gejala_id' => 1, 'bobot' => 0.4],
-                ],
-            ],
+        // Ambil semua penyakit: [kode_penyakit => id]
+        $penyakit = Penyakit::pluck('id', 'kode_penyakit');
 
-            // ===== PENYAKIT 2: Anthrax (Radang Limpa) =====
-            [
-                'kode_rule'     => 'R004',
-                'penyakit_id'   => 2,
-                'kondisi_fuzzy' => 'Sangat Yakin',
-                'output_a'      => 55,
-                'output_b'      => 75,
-                'output_c'      => 100,
-                'output_d'      => 100,
-                'details'       => [
-                    ['gejala_id' => 5, 'bobot' => 0.9],  // G005: Demam tinggi
-                    ['gejala_id' => 6, 'bobot' => 0.8],  // G006: Keluar darah dari lubang tubuh
-                    ['gejala_id' => 7, 'bobot' => 0.7],  // G007: Pembengkakan limpa
-                ],
-            ],
-            [
-                'kode_rule'     => 'R005',
-                'penyakit_id'   => 2,
-                'kondisi_fuzzy' => 'Yakin',
-                'output_a'      => 25,
-                'output_b'      => 45,
-                'output_c'      => 55,
-                'output_d'      => 75,
-                'details'       => [
-                    ['gejala_id' => 5, 'bobot' => 0.7],
-                    ['gejala_id' => 7, 'bobot' => 0.6],
-                ],
-            ],
-            [
-                'kode_rule'     => 'R006',
-                'penyakit_id'   => 2,
-                'kondisi_fuzzy' => 'Tidak Yakin',
-                'output_a'      => 0,
-                'output_b'      => 0,
-                'output_c'      => 25,
-                'output_d'      => 45,
-                'details'       => [
-                    ['gejala_id' => 5, 'bobot' => 0.4],
-                ],
-            ],
-
-            // ===== PENYAKIT 3: Brucellosis (Kluron Menular) =====
-            [
-                'kode_rule'     => 'R007',
-                'penyakit_id'   => 3,
-                'kondisi_fuzzy' => 'Sangat Yakin',
-                'output_a'      => 55,
-                'output_b'      => 75,
-                'output_c'      => 100,
-                'output_d'      => 100,
-                'details'       => [
-                    ['gejala_id' => 8, 'bobot' => 0.9],  // G008: Keguguran pada trimester akhir
-                    ['gejala_id' => 9, 'bobot' => 0.8],  // G009: Pembengkakan sendi
-                    ['gejala_id' => 10, 'bobot' => 0.6], // G010: Anak sapi lemah
-                ],
-            ],
-            [
-                'kode_rule'     => 'R008',
-                'penyakit_id'   => 3,
-                'kondisi_fuzzy' => 'Yakin',
-                'output_a'      => 25,
-                'output_b'      => 45,
-                'output_c'      => 55,
-                'output_d'      => 75,
-                'details'       => [
-                    ['gejala_id' => 8, 'bobot' => 0.7],
-                    ['gejala_id' => 9, 'bobot' => 0.6],
-                ],
-            ],
-            [
-                'kode_rule'     => 'R009',
-                'penyakit_id'   => 3,
-                'kondisi_fuzzy' => 'Tidak Yakin',
-                'output_a'      => 0,
-                'output_b'      => 0,
-                'output_c'      => 25,
-                'output_d'      => 45,
-                'details'       => [
-                    ['gejala_id' => 10, 'bobot' => 0.5],
-                ],
-            ],
-
-            // ===== PENYAKIT 4: Mastitis =====
-            [
-                'kode_rule'     => 'R010',
-                'penyakit_id'   => 4,
-                'kondisi_fuzzy' => 'Sangat Yakin',
-                'output_a'      => 55,
-                'output_b'      => 75,
-                'output_c'      => 100,
-                'output_d'      => 100,
-                'details'       => [
-                    ['gejala_id' => 11, 'bobot' => 0.9], // G011: Ambing bengkak dan keras
-                    ['gejala_id' => 12, 'bobot' => 0.8], // G012: Susu mengandung gumpalan/nanah
-                    ['gejala_id' => 13, 'bobot' => 0.7], // G013: Nafsu makan menurun
-                ],
-            ],
-            [
-                'kode_rule'     => 'R011',
-                'penyakit_id'   => 4,
-                'kondisi_fuzzy' => 'Yakin',
-                'output_a'      => 25,
-                'output_b'      => 45,
-                'output_c'      => 55,
-                'output_d'      => 75,
-                'details'       => [
-                    ['gejala_id' => 11, 'bobot' => 0.7],
-                    ['gejala_id' => 12, 'bobot' => 0.6],
-                ],
-            ],
+        // Parameter output fuzzy untuk setiap kondisi
+        $outputParams = [
+            'Tidak Yakin'  => ['output_a' => 0,  'output_b' => 0,  'output_c' => 25, 'output_d' => 45],
+            'Yakin'        => ['output_a' => 25, 'output_b' => 45, 'output_c' => 55, 'output_d' => 75],
+            'Sangat Yakin' => ['output_a' => 55, 'output_b' => 75, 'output_c' => 100, 'output_d' => 100],
         ];
 
-        // Insert data rule dan detail
-        foreach ($rules as $ruleData) {
-            $details = $ruleData['details'];
-            unset($ruleData['details']);
+        // Daftar aturan: [kode_rule, kode_penyakit, kondisi_fuzzy]
+        $rules = [
+            // P001 – Septicemia Epizootica
+            ['R001', 'P001', 'Yakin'],
 
-            // Insert rule
-            $ruleId = DB::table('rules')->insertGetId(array_merge($ruleData, [
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]));
+            // P002 – Anthraks
+            ['R002', 'P002', 'Yakin'],
+            ['R003', 'P002', 'Sangat Yakin'],
+            ['R004', 'P002', 'Tidak Yakin'],
 
-            // Insert rule details
-            foreach ($details as $detail) {
-                DB::table('rule_details')->insert([
-                    'rule_id'    => $ruleId,
-                    'gejala_id'  => $detail['gejala_id'],
-                    'bobot'      => $detail['bobot'],
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);
-            }
+            // P003 – ParaTuberculosis
+            ['R005', 'P003', 'Yakin'],
+            ['R006', 'P003', 'Tidak Yakin'],
+
+            // P004 – Keluron
+            ['R007', 'P004', 'Sangat Yakin'],
+            ['R008', 'P004', 'Yakin'],
+
+            // P005 – Tuberculosis
+            ['R009', 'P005', 'Yakin'],
+            ['R010', 'P005', 'Sangat Yakin'],
+            ['R011', 'P005', 'Tidak Yakin'],
+
+            // P006 – Botulismus
+            ['R012', 'P006', 'Sangat Yakin'],
+
+            // P007 – Mastitis
+            ['R013', 'P007', 'Yakin'],
+            ['R014', 'P007', 'Tidak Yakin'],
+
+            // P008 – Tetanus
+            ['R015', 'P008', 'Yakin'],
+            ['R016', 'P008', 'Sangat Yakin'],
+
+            // P009 – Erysipelas
+            ['R017', 'P009', 'Yakin'],
+            ['R018', 'P009', 'Sangat Yakin'],
+            ['R019', 'P009', 'Tidak Yakin'],
+
+            // P010 – Leptospirosis
+            ['R020', 'P010', 'Yakin'],
+            ['R021', 'P010', 'Tidak Yakin'],
+
+            // P011 – Listeriosis
+            ['R022', 'P011', 'Yakin'],
+            ['R023', 'P011', 'Sangat Yakin'],
+
+            // P012 – Rabies
+            ['R024', 'P012', 'Yakin'],
+            ['R025', 'P012', 'Sangat Yakin'],
+
+            // P013 – PMK
+            ['R026', 'P013', 'Yakin'],
+            ['R027', 'P013', 'Sangat Yakin'],
+
+            // P014 – Surra
+            ['R028', 'P014', 'Yakin'],
+            ['R029', 'P014', 'Tidak Yakin'],
+
+            // P015 – Kuku Busuk
+            ['R030', 'P015', 'Yakin'],
+
+            // P016 – Kembung Perut
+            ['R031', 'P016', 'Yakin'],
+            ['R032', 'P016', 'Tidak Yakin'],
+
+            // P017 – Demam Tiga Hari
+            ['R033', 'P017', 'Yakin'],
+            ['R034', 'P017', 'Tidak Yakin'],
+
+            // P018 – Ingusan
+            ['R035', 'P018', 'Yakin'],
+            ['R036', 'P018', 'Tidak Yakin'],
+
+            // P019 – Kudis
+            ['R037', 'P019', 'Yakin'],
+            ['R038', 'P019', 'Sangat Yakin'],
+
+            // P020 – Cacingan
+            ['R039', 'P020', 'Yakin'],
+            ['R040', 'P020', 'Sangat Yakin'],
+            ['R041', 'P020', 'Tidak Yakin'],
+        ];
+
+        foreach ($rules as $rule) {
+            $kodeRule     = $rule[0];
+            $kodePenyakit = $rule[1];
+            $kondisi      = $rule[2];
+            $out          = $outputParams[$kondisi];
+
+            Rule::create([
+                'kode_rule'     => $kodeRule,
+                'penyakit_id'   => $penyakit[$kodePenyakit],
+                'kondisi_fuzzy' => $kondisi,
+                'output_a'      => $out['output_a'],
+                'output_b'      => $out['output_b'],
+                'output_c'      => $out['output_c'],
+                'output_d'      => $out['output_d'],
+            ]);
         }
     }
 }

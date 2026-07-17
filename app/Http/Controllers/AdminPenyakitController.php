@@ -37,7 +37,7 @@ class AdminPenyakitController extends Controller
         ]);
 
         Penyakit::create($data);
-        return redirect()->route('penyakit.index')->with('success', 'Penyakit dibuat.');
+        return redirect()->route('penyakit')->with('success', 'Penyakit dibuat.');
     }
 
     public function edit(Penyakit $penyakit)
@@ -45,8 +45,10 @@ class AdminPenyakitController extends Controller
         return view('admin.penyakit.edit', compact('penyakit'));
     }
 
-    public function update(Request $request, Penyakit $penyakit)
+    public function update(Request $request, $id)
     {
+        $penyakit = Penyakit::findOrFail($id);
+
         $data = $request->validate([
             'kode_penyakit' => 'required|string|max:5|unique:penyakit,kode_penyakit,' . $penyakit->id,
             'nama_penyakit' => 'required|string|max:100',
@@ -58,8 +60,9 @@ class AdminPenyakitController extends Controller
         return redirect()->route('penyakit')->with('success', 'Penyakit diperbarui.');
     }
 
-    public function destroy(Penyakit $penyakit)
+    public function destroy($id)
     {
+        $penyakit = Penyakit::findOrFail($id);
         $penyakit->delete();
         return redirect()->route('penyakit')->with('success', 'Penyakit dihapus.');
     }

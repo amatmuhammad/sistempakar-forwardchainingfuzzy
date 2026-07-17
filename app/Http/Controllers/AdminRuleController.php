@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Rule;
 use App\Models\Penyakit;
 use App\Models\Gejala;
-use App\Models\RuleDetail;
+// use App\Models\RuleDetail;
 use Illuminate\Http\Request;
 
 class AdminRuleController extends Controller
@@ -106,11 +106,11 @@ class AdminRuleController extends Controller
     public function destroy($id)
     {
         $rule = Rule::findOrFail($id);
-        
-        // Hapus rule details terlebih dahulu
-        $rule->ruleDetails()->delete();
-        
-        // Hapus rule
+
+        // Simpan relasi detail dengan nilai null agar data relasi tidak ikut terhapus.
+        $rule->ruleDetails()->update(['rule_id' => null]);
+
+        // Hapus rule utama.
         $rule->delete();
 
         return redirect()->route('rules')->with('success', 'Rule berhasil dihapus!');

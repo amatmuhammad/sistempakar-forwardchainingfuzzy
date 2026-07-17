@@ -103,34 +103,7 @@
         transition: background-color 0.3s ease, color 0.2s ease;
     }
 
-    /* Sidebar (disesuaikan dengan class di layout Anda) */
-    .layout-menu {
-        background-color: var(--bg-sidebar) !important;
-        border-right: 1px solid var(--border-color) !important;
-        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
-    }
-    .layout-menu .app-brand {
-        padding: 1rem 1rem 0.75rem;
-        border-bottom: 1px solid var(--border-color);
-    }
-    .layout-menu .sidebar-brand__logo {
-        width: 170px;
-        max-height: 110px;
-        object-fit: contain;
-        display: block;
-        margin: 0 auto;
-    }
-    .layout-menu .menu-inner {
-        padding: 0.75rem 0.8rem 1rem;
-    }
-    .layout-menu .menu-header {
-        margin: 0.8rem 0.35rem 0.45rem;
-        padding: 0.25rem 0.25rem 0.4rem;
-        font-size: 0.72rem;
-        letter-spacing: 0.14em;
-        color: var(--text-secondary) !important;
-        font-weight: 700;
-    }
+   
     .layout-menu .menu-item .menu-link {
         margin: 0.2rem 0;
         padding: 0.8rem 0.9rem;
@@ -151,10 +124,10 @@
         font-size: 1rem;
         margin-right: 0.75rem;
     }
-    .layout-menu .menu-divider {
+    /* .layout-menu .menu-divider {
         border-color: var(--border-color) !important;
         margin: 0.25rem 1rem 0;
-    }
+    } */
 
     /* Card, modal, info card */
     .card, .modal-content, .clean-card, .info-card {

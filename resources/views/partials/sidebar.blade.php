@@ -48,6 +48,13 @@
           </a>
       </li>
 
+      <li class="menu-item {{ Request::routeIs('rule-details*') ? 'active' : '' }}">
+          <a href="{{ route('rule-details') }}" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-link-alt"></i>
+              <div class="text-truncate">Rule Details</div>
+          </a>
+      </li>
+
     
 
   @endcan
